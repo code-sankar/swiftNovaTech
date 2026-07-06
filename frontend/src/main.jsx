@@ -11,12 +11,10 @@ import {
 } from "react-router-dom";
 
 import App from "./App.jsx";
-import Blockchain from "./pages/Our_services/blockchain.jsx";
-import CloudSolutions from "./pages/Our_services/cloud_solutions.jsx";
-import Cybersecurity from "./pages/Our_services/cybersecurity.jsx";
-import DataAnalytics from "./pages/Our_services/data_analytics.jsx";
-import MobileDevelopment from "./pages/Our_services/mobiledev.jsx";
-import Testing from "./pages/Our_services/testing.jsx";
+import CMS from "./pages/Our_services/cms.jsx";
+import Ecommerce from "./pages/Our_services/cms.jsx";
+import WebApps from "./pages/Our_services/wenApps.jsx";
+import Maintenance from "./pages/Our_services/Maintenence.jsx";
 import UIUXDesign from "./pages/Our_services/uiux.jsx";
 import WebDevelopment from "./pages/Our_services/webdev.jsx";
 import NotFound from "./pages/NotFound.jsx";
@@ -27,11 +25,12 @@ import Home from "./pages/Home.jsx";
 import WhyUs from "./pages/Our_services/WhyUs.jsx";
 import CaseStudies from "./pages/Portfolio/CaseStudies.jsx";
 import ClientProjects from "./pages/Portfolio/ClientProjects.jsx";
-import AIMachineLearning from "./pages/Our_services/ai_machine_learning.jsx";
+//import AIMachineLearning from "./pages/Our_services/ai_machine_learning.jsx";
 import PrivacyPolicy from "./pages/FooterPages/PrivacyPolicy.jsx";
 import TermsOfService from "./pages/FooterPages/TermsOfService.jsx";
 import Disclaimer from "./pages/FooterPages/Disclaimer.jsx";
 import Sitemap from "./pages/FooterPages/Sitemap.jsx";
+import ProjectDetail from "./pages/Portfolio/ProjectDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -50,38 +49,31 @@ const router = createBrowserRouter([
         path: "/web",
         element: <WebDevelopment />,
       },
-      {
-        path: "/apps",
-        element: <MobileDevelopment />,
-      },
+      // {
+      //   path: "/apps",
+      //   element: <MobileDevelopment />,
+      // },
       {
         path: "/design",
         element: <UIUXDesign />,
       },
       {
-        path: "/cybersecurity",
-        element: <Cybersecurity />,
+        path: "/cms",
+        element: <CMS />,
       },
       {
-        path: "/analytics",
-        element: <DataAnalytics />,
+        path: "/web-apps",
+        element: <WebApps />,
       },
       {
-        path: "/cloud",
-        element: <CloudSolutions />,
+        path: "/maintenance",
+        element: <Maintenance />,
       },
       {
-        path: "/blockchain",
-        element: <Blockchain />,
+        path: "/ecommerce",
+        element: <Ecommerce />,
       },
-      {
-        path: "/testing",
-        element: <Testing />,
-      },
-      {
-        path: "/tech",
-        element: <Technologies />,
-      },
+
       {
         path: "/blog",
         element: <Blogs />,
@@ -103,13 +95,21 @@ const router = createBrowserRouter([
         element: <ClientProjects />,
       },
       {
-        path: "ai",
-        element: <AIMachineLearning />,
+        path: "/tech",
+        element: <Technologies />,
       },
+      // {
+      //   path: "ai",
+      //   element: <AIMachineLearning />,
+      // },
       { path: "/privacy-policy", element: <PrivacyPolicy /> },
       { path: "/terms-of-service", element: <TermsOfService /> },
       { path: "/disclaimer", element: <Disclaimer /> },
       { path: "/sitemap", element: <Sitemap /> },
+      {
+        path: "/projects/:slug",
+        element: <ProjectDetail />,
+      },
     ],
   },
   {

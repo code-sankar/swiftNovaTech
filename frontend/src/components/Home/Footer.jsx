@@ -2,11 +2,12 @@ import { MapPin, Phone, Mail, Clock, Github, Linkedin, Twitter, Facebook } from 
 import { Link } from "react-router-dom";
 
 const services = [
-  ["Web Development", "/web"],
-  ["Mobile Apps", "/apps"],
-  ["UI/UX Design", "/design"],
-  ["Cloud & DevOps", "/cloud"],
-  ["Data & AI", "/ai"],
+  ["Custom Web Development", "/web"],
+  ["E-commerce Development", "/ecommerce"],
+  ["Web Applications & SaaS", "/web-apps"],
+  ["CMS & Headless", "/cms"],
+  ["Website Design", "/design"],
+  ["Maintenance & SEO", "/maintenance"],
 ];
 
 const links = [
@@ -34,22 +35,22 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center gap-2.5">
-              <span className="grid h-[26px] w-[26px] place-items-center border-[1.5px] border-ink font-mono text-[0.8rem] font-semibold">
-                S
+              <span className="grid h-[80px] w-[50px] place-items-center ">
+                <img src="https://res.cloudinary.com/dx7b8hfwm/image/upload/v1783183469/Gemini_Generated_Image_rm3dvgrm3dvgrm3d_1_1_otjrzm.png" alt="SwiftNova Logo" />
               </span>
               <span className="leading-none">
                 <span className="font-display text-[1.12rem] font-semibold tracking-tight">
-                  SanRaf
+                  SwiftNova
                 </span>
                 <br />
                 <span className="font-mono text-[0.62rem] text-faint">
-                  Software Engineering Studio
+                  Web Design &amp; Development Studio
                 </span>
               </span>
             </Link>
             <p className="mt-4 max-w-[32ch] text-[0.9rem] leading-relaxed text-graphite">
-              Building scalable, modern software for teams that need it done
-              right — from first commit to production.
+              Building fast, modern websites for teams that need them done
+              right — from first wireframe to launch and beyond.
             </p>
             <div className="mt-5 flex gap-4">
               {[Facebook, Twitter, Linkedin, Github].map((Icon, i) => (
@@ -114,7 +115,7 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <div className="flex flex-col justify-between gap-3 border-t border-line py-6 font-mono text-[0.72rem] text-faint sm:flex-row">
-          <p>© {year} Sankar &amp; Rafel Software Solutions. All rights reserved.</p>
+          <p>© {year} SwiftNova Tech. All rights reserved.</p>
           <div className="flex flex-wrap gap-5">
             {legalLinks.map(([label, href]) => (
               <Link key={label} to={href} className="transition hover:text-ink">

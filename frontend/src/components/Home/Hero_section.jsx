@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const capabilities = [
-  { n: "01", t: "Web platforms", d: "React · Node" },
-  { n: "02", t: "Mobile apps", d: "iOS · Android" },
-  { n: "03", t: "Cloud & DevOps", d: "AWS · CI/CD" },
-  { n: "04", t: "UI/UX design", d: "Figma" },
-  { n: "05", t: "Data & AI", d: "Python" },
+  { n: "01", t: "Custom Websites", d: "React · Next.js" },
+  { n: "02", t: "E-commerce", d: "Shopify · Custom" },
+  { n: "03", t: "Web Apps & SaaS", d: "Full-stack" },
+  { n: "04", t: "CMS / Headless", d: "WordPress · Sanity" },
+  { n: "05", t: "Website Design", d: "Figma · UI/UX" },
 ];
 
 const fadeUp = {
@@ -35,7 +35,7 @@ const Hero_section = () => {
               className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint"
             >
               <span className="inline-block h-px w-3.5 bg-accent" />
-              software engineering studio
+              web design &amp; development studio
             </motion.span>
 
             <motion.h1
@@ -45,7 +45,7 @@ const Hero_section = () => {
               animate="show"
               className="my-6 max-w-[15ch] font-display text-[clamp(2.5rem,1.4rem+4.6vw,4.7rem)] font-medium leading-[1.04] tracking-tight text-ink"
             >
-              We build software teams actually{" "}
+              We build websites teams actually{" "}
               <span className="border-b-2 border-accent pb-0.5">rely on.</span>
             </motion.h1>
 
@@ -56,10 +56,10 @@ const Hero_section = () => {
               animate="show"
               className="max-w-[52ch] text-[clamp(1.05rem,1rem+0.4vw,1.28rem)] leading-[1.55] text-graphite"
             >
-              SanRaf is a product engineering studio. We partner with founders
-              and companies to design, ship, and maintain web platforms, mobile
-              apps, and the systems behind them — from first commit to
-              production.
+              SanRaf is a web design and development studio. We partner with
+              founders and companies to design, build, and maintain fast,
+              conversion-focused websites — from marketing sites and e-commerce
+              stores to full web applications.
             </motion.p>
 
             <motion.div

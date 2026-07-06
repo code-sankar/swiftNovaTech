@@ -4,31 +4,31 @@ import { Code, Rocket, ShieldCheck, Users } from "lucide-react";
 const features = [
   {
     Icon: Code,
-    title: "Expert Engineers",
-    desc: "Modern frameworks, cloud-native apps, and scalable architectures — built by senior engineers.",
+    title: "Modern Web Stack",
+    desc: "React, Next.js, Node, and headless CMS — built by developers who care about code quality and Core Web Vitals.",
   },
   {
     Icon: Rocket,
-    title: "Agile & Rapid Delivery",
-    desc: "Iterative development with clear sprints keeps time-to-market short and progress visible.",
+    title: "Built for Performance",
+    desc: "Every site we ship is optimised for speed, SEO, and mobile — because a slow website is a losing website.",
   },
   {
     Icon: ShieldCheck,
-    title: "Security-Driven",
-    desc: "Security, compliance, and reliability are considered in every project from day one.",
+    title: "Secure by Default",
+    desc: "SSL, secure coding standards, and hardened deployments come as standard — not an upsell after launch.",
   },
   {
     Icon: Users,
     title: "Collaborative Approach",
-    desc: "Open communication and feedback cycles keep you in control the whole way through.",
+    desc: "Weekly demos and open feedback cycles keep you in control from wireframe through go-live.",
   },
 ];
 
 const stats = [
-  { value: "10+", label: "years in tech" },
-  { value: "120+", label: "projects delivered" },
-  { value: "98%", label: "client satisfaction" },
-  { value: "30+", label: "global clients" },
+  { value: "2+", label: "years building the web" },
+  { value: "30+", label: "websites shipped" },
+  { value: "95%", label: "client satisfaction" },
+  { value: "25+", label: "global clients" },
 ];
 
 const WhyChooseUs = () => {
@@ -46,9 +46,9 @@ const WhyChooseUs = () => {
               We work like part of your team.
             </h2>
             <p className="mt-5 max-w-[52ch] text-graphite">
-              We're not just developers — we're engineering partners. From
-              early-stage startups to established companies, we deliver reliable,
-              scalable software that holds up in production.
+              We're not just developers — we're your web partners. From
+              early-stage founders to established brands, we design and build
+              websites that load fast, rank well, and convert.
             </p>
 
             <div className="mt-10 border-t border-line">

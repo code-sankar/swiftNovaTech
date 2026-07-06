@@ -20,17 +20,14 @@ const groups = [
     id: "services",
     label: "services",
     heading: "What we build",
-    caption: "Nine practice areas, each with its own dedicated page covering scope, process, and stack.",
+    caption: "Six web practice areas, each with its own page covering scope, process, and stack.",
     items: [
-      { n: "01", path: "/web",           title: "Web Development",         desc: "Web platforms and applications" },
-      { n: "02", path: "/apps",          title: "Mobile App Development",  desc: "iOS, Android, React Native, Flutter" },
-      { n: "03", path: "/design",        title: "UI/UX Design",            desc: "Research, prototyping, design systems" },
-      { n: "04", path: "/cloud",         title: "Cloud Solutions",         desc: "AWS, Azure, GCP, DevOps, infra" },
-      { n: "05", path: "/analytics",     title: "Data & Analytics",        desc: "Pipelines, BI, dashboards, ML" },
-      { n: "06", path: "/ai",            title: "AI & Machine Learning",   desc: "Applied AI, NLP, computer vision" },
-      { n: "07", path: "/cybersecurity", title: "Cybersecurity",           desc: "Audits, pen-testing, compliance" },
-      { n: "08", path: "/blockchain",    title: "Blockchain Solutions",    desc: "Smart contracts, dApps, Web3" },
-      { n: "09", path: "/testing",       title: "QA & Testing",            desc: "Automated and manual testing" },
+      { n: "01", path: "/web",         title: "Custom Web Development",   desc: "Custom-built websites in React & Next.js" },
+      { n: "02", path: "/ecommerce",   title: "E-commerce Development",   desc: "Shopify, custom stores, Stripe checkout" },
+      { n: "03", path: "/web-apps",    title: "Web Applications & SaaS",  desc: "Full-stack web apps, dashboards, portals" },
+      { n: "04", path: "/cms",         title: "CMS & Headless Websites",  desc: "WordPress, Sanity, Contentful, Strapi" },
+      { n: "05", path: "/design",      title: "Website Design (UI/UX)",   desc: "Research, wireframes, design systems" },
+      { n: "06", path: "/maintenance", title: "Maintenance & SEO",        desc: "Hosting, updates, Core Web Vitals, SEO" },
     ],
   },
   {
@@ -103,29 +100,21 @@ const Sitemap = () => {
             </p>
 
             {/* meta row */}
-            <div className="mt-10 grid grid-cols-3 gap-6 border-t border-line pt-6 sm:max-w-lg">
+            <div className="mt-10 grid grid-cols-2 gap-6 border-t border-line pt-6 sm:max-w-md">
               <div>
                 <p className="font-mono text-[0.72rem] lowercase text-faint">
-                  pages
+                  total pages
                 </p>
-                <p className="mt-1 font-display text-[1.5rem] font-medium leading-none text-ink">
-                  {String(totalPages).padStart(2, "0")}
+                <p className="mt-1 font-display text-[0.95rem] font-medium text-ink">
+                  {totalPages}
                 </p>
               </div>
               <div>
                 <p className="font-mono text-[0.72rem] lowercase text-faint">
                   sections
                 </p>
-                <p className="mt-1 font-display text-[1.5rem] font-medium leading-none text-ink">
-                  {String(totalSections).padStart(2, "0")}
-                </p>
-              </div>
-              <div>
-                <p className="font-mono text-[0.72rem] lowercase text-faint">
-                  format
-                </p>
-                <p className="mt-1 font-display text-[1.5rem] font-medium leading-none text-ink">
-                  HTML
+                <p className="mt-1 font-display text-[0.95rem] font-medium text-ink">
+                  {totalSections}
                 </p>
               </div>
             </div>
@@ -133,10 +122,10 @@ const Sitemap = () => {
         </div>
       </section>
 
-      {/* ══════════ INDEX GROUPS ══════════ */}
+      {/* ══════════ GROUPS ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
-          <div className="space-y-20 md:space-y-28">
+          <div className="space-y-20">
             {groups.map((g) => (
               <div key={g.id}>
                 {/* group header */}

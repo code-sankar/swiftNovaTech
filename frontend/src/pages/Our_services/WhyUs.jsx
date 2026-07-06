@@ -13,10 +13,10 @@ import {
 /* ─── data ───────────────────────────────────────────────────── */
 
 const stats = [
-  { value: "200+", label: "projects completed" },
-  { value: "98%",  label: "client satisfaction" },
-  { value: "50+",  label: "expert developers" },
-  { value: "24/7", label: "support available" },
+  { value: "30+", label: "websites shipped" },
+  { value: "95%", label: "client satisfaction" },
+  { value: "25+", label: "global clients" },
+  { value: "2+",  label: "years building the web" },
 ];
 
 const features = [
@@ -24,29 +24,29 @@ const features = [
     icon: ShieldCheck,
     title: "Reliable & Secure",
     description:
-      "Top-tier code quality, security practices, and data protection across every solution we ship.",
-    highlights: ["Enterprise Security", "Code Quality", "Data Protection"],
+      "Clean code, hardened deployments, and data protection built into every site — SSL, backups, and secure hosting come standard.",
+    highlights: ["Secure Hosting", "SSL / HTTPS", "Regular Backups"],
   },
   {
     icon: Users,
     title: "Dedicated Team",
     description:
-      "Developers, designers, and strategists who work together — not in silos — to bring your vision to life.",
-    highlights: ["Expert Developers", "UI/UX Designers", "Project Managers"],
+      "Designers and developers who work together — not in silos — to turn your brief into a website that actually ships.",
+    highlights: ["Web Developers", "UI/UX Designers", "Project Leads"],
   },
   {
     icon: Clock,
     title: "On-Time Delivery",
     description:
-      "Agile workflows and milestone tracking mean you always know where things stand and when they land.",
-    highlights: ["Agile Methodology", "Milestone Tracking", "Quick Deployment"],
+      "Weekly demos, milestone tracking, and honest communication mean you always know where the build stands and when it lands.",
+    highlights: ["Agile Sprints", "Weekly Demos", "Quick Deployment"],
   },
   {
     icon: Code2,
-    title: "Modern Tech Stack",
+    title: "Modern Web Stack",
     description:
-      "We use the frameworks your product actually needs — React, Node.js, Next.js, cloud-native infrastructure.",
-    highlights: ["React / Next.js", "Node.js", "Cloud Native"],
+      "React, Next.js, Node, and headless CMS — the frameworks your website actually needs to be fast, secure, and easy to update.",
+    highlights: ["React / Next.js", "Headless CMS", "Vercel / AWS"],
   },
 ];
 
@@ -56,12 +56,12 @@ const ratings = [
 ];
 
 const reasons = [
-  "We don't subcontract. The team you meet is the team that builds.",
+  "We don't subcontract. The team you meet is the team that builds your site.",
   "Every engagement starts with discovery, not a quote.",
-  "We stay on after launch — monitoring, fixes, and what comes next.",
+  "We stay on after launch — hosting, updates, and what comes next.",
   "Transparent pricing. No change-order surprises mid-project.",
-  "Senior engineers on every project, not just for kickoff.",
-  "100+ companies trust us with their production systems.",
+  "Senior developers on every project, not just for kickoff.",
+  "25+ companies trust us with their online presence.",
 ];
 
 /* ─── component ──────────────────────────────────────────────── */
@@ -86,10 +86,10 @@ const WhyUs = () => {
                 <span className="border-b-2 border-accent pb-0.5">accountable</span>.
               </h1>
               <p className="mt-6 max-w-[52ch] text-[clamp(1.02rem,1rem+0.4vw,1.2rem)] leading-[1.55] text-graphite">
-                We're not just another development agency. We're a studio that
-                treats your product like it's ours — from the first call through
-                production support. Over 100 companies have trusted us with
-                their digital foundations.
+                We're not just another web agency. We're a studio that treats
+                your website like it's ours — from the first wireframe through
+                post-launch support. 25+ companies trust us with their online
+                presence.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <button
@@ -133,7 +133,7 @@ const WhyUs = () => {
                 </div>
               ))}
               <div className="border-t border-line px-4 py-3 font-mono text-[0.72rem] text-faint">
-                trusted by 100+ companies worldwide
+                trusted by 25+ companies worldwide
               </div>
             </aside>
           </div>
@@ -184,7 +184,7 @@ const WhyUs = () => {
             </div>
             <p className="max-w-[36ch] text-graphite">
               These aren't marketing lines — they're commitments we make on
-              every engagement, regardless of scope or budget.
+              every website, regardless of scope or budget.
             </p>
           </div>
 
@@ -311,12 +311,12 @@ const WhyUs = () => {
             ready to work together
           </span>
           <h2 className="mt-5 max-w-[22ch] font-display text-[clamp(1.9rem,1.3rem+2.2vw,2.9rem)] font-medium leading-[1.08] tracking-tight text-paper">
-            Ready to transform your digital presence? Let's talk.
+            Ready to transform your online presence? Let's talk.
           </h2>
           <p className="mt-4 max-w-[48ch] text-[#9AA0AC]">
-            Join 100+ satisfied clients who trust us with their digital
-            transformation. The first call is free — no pitch, just a
-            conversation about what you're building.
+            Join 25+ satisfied clients who trust us with their websites. The
+            first call is free — no pitch, just a conversation about what
+            you're building.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <button

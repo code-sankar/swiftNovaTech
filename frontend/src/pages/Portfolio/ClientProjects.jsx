@@ -1,122 +1,19 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Filter } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { ArrowRight, ArrowUpRight, ExternalLink, Filter } from "lucide-react";
+import { projects, projectCategories, getFeatured } from "../../data/projects";
 
-/* ─── data (placeholder — swap for real projects) ───────────────── */
+/* ─── data ────────────────────────────────────────────────── */
 
 const stats = [
-  { value: "60+", label: "projects delivered" },
-  { value: "12", label: "industries served" },
-  { value: "8", label: "countries reached" },
-  { value: "94%", label: "repeat clients" },
+  { value: "30+", label: "websites shipped" },
+  { value: "10+", label: "industries served" },
+  { value: "6",   label: "countries reached" },
+  { value: "95%", label: "client satisfaction" },
 ];
 
-const categories = ["All", "Web", "Mobile", "Design", "Cloud", "Data & AI"];
-
-const featured = {
-  name: "Meridian Commerce Platform",
-  client: "Meridian Retail Group",
-  category: "Web",
-  year: "2025",
-  summary:
-    "A headless commerce platform serving 2M+ monthly shoppers across 14 markets, rebuilt from a legacy monolith with zero downtime migration.",
-  outcome: "3× faster checkout · 40% mobile conversion lift",
-  tags: ["React", "Node.js", "PostgreSQL", "AWS", "Stripe"],
-};
-
-const projects = [
-  {
-    name: "Pulse Health Companion",
-    client: "Pulse Medical",
-    category: "Mobile",
-    year: "2025",
-    summary:
-      "A patient companion app with medication tracking, telehealth, and secure records — HIPAA-compliant end to end.",
-    outcome: "500K+ downloads · 4.8★",
-    tags: ["React Native", "Firebase", "HealthKit"],
-  },
-  {
-    name: "Atlas Logistics Dashboard",
-    client: "Atlas Freight",
-    category: "Data & AI",
-    year: "2024",
-    summary:
-      "Real-time supply-chain visibility with predictive delay alerts and automated replenishment across 200+ sites.",
-    outcome: "45% fewer delays · $2.3M saved",
-    tags: ["Python", "Spark", "Tableau"],
-  },
-  {
-    name: "Northwind Design System",
-    client: "Northwind SaaS",
-    category: "Design",
-    year: "2025",
-    summary:
-      "A full component library and design language unifying 6 product surfaces under one consistent system.",
-    outcome: "58% faster feature delivery",
-    tags: ["Figma", "Storybook", "Design Tokens"],
-  },
-  {
-    name: "Vertex Cloud Migration",
-    client: "Vertex Financial",
-    category: "Cloud",
-    year: "2024",
-    summary:
-      "Zero-downtime migration from on-prem to a Kubernetes-based cloud-native architecture with full observability.",
-    outcome: "99.99% uptime · 40% cost cut",
-    tags: ["AWS", "Kubernetes", "Terraform"],
-  },
-  {
-    name: "Lumen Learning Platform",
-    client: "Lumen Education",
-    category: "Web",
-    year: "2024",
-    summary:
-      "An adaptive learning platform with gamification and live collaboration, scaled to learners in 15 countries.",
-    outcome: "3× course completion",
-    tags: ["Vue.js", "Laravel", "WebRTC"],
-  },
-  {
-    name: "Orbit Fraud Engine",
-    client: "Orbit Payments",
-    category: "Data & AI",
-    year: "2025",
-    summary:
-      "A real-time transaction fraud detection engine running ML scoring on every payment with sub-100ms latency.",
-    outcome: "94% detection · $4.7M prevented",
-    tags: ["TensorFlow", "Kafka", "Go"],
-  },
-  {
-    name: "Harbor Booking App",
-    client: "Harbor Hospitality",
-    category: "Mobile",
-    year: "2024",
-    summary:
-      "A cross-platform booking app with one-tap reordering, live availability, and integrated payments.",
-    outcome: "60% more completed bookings",
-    tags: ["Flutter", "Stripe", "Maps API"],
-  },
-  {
-    name: "Cobalt Analytics Suite",
-    client: "Cobalt Media",
-    category: "Design",
-    year: "2025",
-    summary:
-      "A dashboard redesign turning a dense analytics tool into an interface non-analysts could actually use.",
-    outcome: "3× daily active users",
-    tags: ["Figma", "User Research", "Prototyping"],
-  },
-  {
-    name: "Sentinel Infra Platform",
-    client: "Sentinel Security",
-    category: "Cloud",
-    year: "2024",
-    summary:
-      "Automated infrastructure with CI/CD pipelines, secrets management, and full audit trails for a security firm.",
-    outcome: "12min deploys · SOC 2 ready",
-    tags: ["GCP", "Docker", "CI/CD"],
-  },
-];
+const featured = getFeatured();
 
 /* ─── component ──────────────────────────────────────────────── */
 
@@ -144,36 +41,21 @@ const ClientProjects = () => {
                 portfolio / client projects
               </span>
               <h1 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,1.3rem+3.8vw,4rem)] font-medium leading-[1.05] tracking-tight text-ink">
-                Work we've shipped for teams like{" "}
+                Websites we've shipped for teams like{" "}
                 <span className="border-b-2 border-accent pb-0.5">yours</span>.
               </h1>
               <p className="mt-6 max-w-[52ch] text-[clamp(1.02rem,1rem+0.4vw,1.2rem)] leading-[1.55] text-graphite">
-                A selection of products we've designed, built, and shipped —
-                across web, mobile, cloud, design, and data. Every one is a real
-                system running in production today.
+                A selection of sites we've designed, built, and launched —
+                across marketing sites, e-commerce stores, web apps, and CMS
+                builds. Open any project to read the story, or head straight to
+                the live site.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <button
-                  onClick={() => navigate("/contact")}
-                  className="group inline-flex items-center gap-2 border border-ink bg-ink px-5 py-3.5 font-mono text-[0.82rem] font-medium text-paper transition hover:border-accent hover:bg-accent"
-                >
-                  Start your project
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </button>
-                <button
-                  onClick={() => navigate("/cases")}
-                  className="inline-flex items-center border border-line-strong px-5 py-3.5 font-mono text-[0.82rem] font-medium text-ink transition hover:border-ink"
-                >
-                  Read case studies
-                </button>
-              </div>
             </div>
 
-            {/* summary panel */}
             <aside className="border border-line bg-white">
               <div className="flex justify-between border-b border-line px-4 py-3 font-mono text-[0.72rem] text-faint">
                 <span>~/portfolio</span>
-                <span>summary</span>
+                <span>at a glance</span>
               </div>
               <div className="grid grid-cols-2">
                 {stats.map((s, i) => (
@@ -215,10 +97,12 @@ const ClientProjects = () => {
                   <span className="text-faint">{featured.year}</span>
                 </div>
                 <h2 className="mt-4 font-display text-[clamp(1.6rem,1.2rem+1.4vw,2.4rem)] font-medium leading-tight tracking-tight text-ink">
-                  {featured.name}
+                  <Link to={`/projects/${featured.slug}`} className="transition hover:text-accent">
+                    {featured.name}
+                  </Link>
                 </h2>
                 <p className="mt-1 font-mono text-[0.74rem] text-faint">
-                  {featured.client}
+                  {featured.nda ? "Confidential client" : featured.client}
                 </p>
                 <p className="mt-5 max-w-[54ch] text-[1rem] leading-relaxed text-graphite">
                   {featured.summary}
@@ -243,13 +127,26 @@ const ClientProjects = () => {
                     {featured.outcome}
                   </p>
                 </div>
-                <button
-                  onClick={() => navigate("/cases")}
-                  className="group mt-8 inline-flex w-fit items-center gap-2 font-mono text-[0.8rem] text-ink transition hover:text-accent"
-                >
-                  Read the full case study
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </button>
+                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <Link
+                    to={`/projects/${featured.slug}`}
+                    className="group inline-flex w-fit items-center gap-2 font-mono text-[0.8rem] text-ink transition hover:text-accent"
+                  >
+                    Read the full story
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                  {featured.liveUrl && !featured.nda && (
+                    <a
+                      href={featured.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex w-fit items-center gap-2 font-mono text-[0.8rem] text-faint transition hover:text-accent"
+                    >
+                      Visit live site
+                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -276,7 +173,7 @@ const ClientProjects = () => {
                 <Filter className="h-3.5 w-3.5" />
                 filter
               </span>
-              {categories.map((c) => (
+              {projectCategories.map((c) => (
                 <button
                   key={c}
                   onClick={() => setActiveFilter(c)}
@@ -304,9 +201,9 @@ const ClientProjects = () => {
               transition={{ duration: 0.2 }}
               className="grid grid-cols-1 border-l border-t border-line md:grid-cols-2 lg:grid-cols-3"
             >
-              {filtered.map((p, i) => (
+              {filtered.map((p) => (
                 <article
-                  key={p.name}
+                  key={p.slug}
                   className="group flex flex-col border-b border-r border-line bg-white p-7"
                 >
                   <div className="flex items-center justify-between font-mono text-[0.72rem]">
@@ -315,10 +212,12 @@ const ClientProjects = () => {
                   </div>
 
                   <h3 className="mt-5 font-display text-[1.2rem] font-medium leading-snug text-ink">
-                    {p.name}
+                    <Link to={`/projects/${p.slug}`} className="transition hover:text-accent">
+                      {p.name}
+                    </Link>
                   </h3>
                   <p className="mt-1 font-mono text-[0.72rem] text-faint">
-                    {p.client}
+                    {p.nda ? "Confidential client" : p.client}
                   </p>
 
                   <p className="mt-4 flex-1 text-[0.9rem] leading-relaxed text-graphite">
@@ -338,6 +237,28 @@ const ClientProjects = () => {
 
                   <div className="mt-5 border-t border-line pt-4 font-mono text-[0.72rem] text-accent">
                     → {p.outcome}
+                  </div>
+
+                  {/* actions */}
+                  <div className="mt-4 flex items-center justify-between">
+                    <Link
+                      to={`/projects/${p.slug}`}
+                      className="group/vp inline-flex items-center gap-1.5 font-mono text-[0.76rem] text-ink transition hover:text-accent"
+                    >
+                      View project
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/vp:translate-x-0.5" />
+                    </Link>
+                    {p.liveUrl && !p.nda && (
+                      <a
+                        href={p.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 font-mono text-[0.76rem] text-faint transition hover:text-accent"
+                      >
+                        <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.6} />
+                        Visit site
+                      </a>
+                    )}
                   </div>
                 </article>
               ))}
@@ -360,7 +281,7 @@ const ClientProjects = () => {
             your project next
           </span>
           <h2 className="mt-5 max-w-[22ch] font-display text-[clamp(1.9rem,1.3rem+2.2vw,2.9rem)] font-medium leading-[1.08] tracking-tight text-paper">
-            Want your product on this page next year?
+            Want your site on this page next year?
           </h2>
           <p className="mt-4 max-w-[48ch] text-[#9AA0AC]">
             Tell us what you're building. The first conversation is free, and

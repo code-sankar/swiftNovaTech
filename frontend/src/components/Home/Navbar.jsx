@@ -8,15 +8,12 @@ const nav = [
   {
     name: "Services",
     submenu: [
-      { name: "Web Development", href: "/web" },
-      { name: "Mobile Apps", href: "/apps" },
-      { name: "AI & Machine Learning", href: "/ai" },
-      { name: "UI/UX Design", href: "/design" },
-      { name: "Cybersecurity", href: "/cybersecurity" },
-      { name: "Data Analytics", href: "/analytics" },
-      { name: "Cloud & DevOps", href: "/cloud" },
-      { name: "Blockchain", href: "/blockchain" },
-      { name: "QA & Testing", href: "/testing" },
+      { name: "Custom Web Development", href: "/web" },
+      { name: "E-commerce Development", href: "/ecommerce" },
+      { name: "Web Applications & SaaS", href: "/web-apps" },
+      { name: "CMS & Headless Websites", href: "/cms" },
+      { name: "Website Design (UI/UX)", href: "/design" },
+      { name: "Maintenance & SEO", href: "/maintenance" },
     ],
   },
   {
@@ -68,16 +65,16 @@ const Navbar = () => {
           <div className="flex h-[68px] items-center justify-between gap-8">
             {/* Brand */}
             <Link to="/" className="flex items-center gap-2.5">
-              <span className="grid h-[26px] w-[26px] place-items-center border-[1.5px] border-ink font-mono text-[0.8rem] font-semibold">
-                S
+              <span className="grid h-[80px] w-[50px] place-items-center ">
+                <img src="https://res.cloudinary.com/dx7b8hfwm/image/upload/v1783183469/Gemini_Generated_Image_rm3dvgrm3dvgrm3d_1_1_otjrzm.png" alt="SwiftNova Logo" />
               </span>
               <span className="leading-none">
                 <span className="font-display text-[1.12rem] font-semibold tracking-tight">
-                  SanRaf
+                  SwiftNova
                 </span>
                 <br />
                 <span className="font-mono text-[0.62rem] text-faint">
-                  Software Engineering Studio
+                  Web Design &amp; Development Studio
                 </span>
               </span>
             </Link>
@@ -105,7 +102,7 @@ const Navbar = () => {
                           transition={{ duration: 0.15 }}
                           className="absolute left-0 top-full pt-3"
                         >
-                          <div className="min-w-[220px] border border-line bg-white">
+                          <div className="min-w-[240px] border border-line bg-white">
                             {item.submenu.map((sub) => (
                               <Link
                                 key={sub.href}

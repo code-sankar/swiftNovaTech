@@ -45,16 +45,16 @@ const contactInfo = [
 ];
 
 const promises = [
-  { icon: Zap,          text: "24–48 hour response time" },
-  { icon: Award,        text: "Free project consultation" },
-  { icon: CheckCircle,  text: "No-obligation quote" },
-  { icon: Star,         text: "Dedicated project manager" },
+  { icon: Zap, text: "24–48 hour response time" },
+  { icon: Award, text: "Free project consultation" },
+  { icon: CheckCircle, text: "No-obligation quote" },
+  { icon: Star, text: "Dedicated project manager" },
 ];
 
 const quickStats = [
-  { value: "24h",  label: "response time" },
+  { value: "24h", label: "response time" },
   { value: "200+", label: "projects done" },
-  { value: "50+",  label: "happy clients" },
+  { value: "50+", label: "happy clients" },
   { value: "5.0★", label: "average rating" },
 ];
 
@@ -77,15 +77,18 @@ const timelineOptions = [
 const inputClass =
   "w-full border border-line bg-paper px-4 py-3 font-body text-[0.95rem] text-ink placeholder:text-faint focus:border-accent focus:bg-white focus:outline-none transition-colors";
 
-const labelClass =
-  "block font-mono text-[0.72rem] lowercase text-faint mb-2";
+const labelClass = "block font-mono text-[0.72rem] lowercase text-faint mb-2";
 
 /* ─── component ──────────────────────────────────────────────── */
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: "", email: "", company: "",
-    budget: "", timeline: "", message: "",
+    name: "",
+    email: "",
+    company: "",
+    budget: "",
+    timeline: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // "success" | "error" | null
@@ -95,22 +98,83 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // silently drop bot submissions
+    if (formData.botcheck) {
+      setSubmitStatus("success");
+      return;
+    }
+
+    const validationError = validateForm(formData);
+    if (validationError) {
+      setErrorMessage(validationError);
+      setSubmitStatus("error");
+      setTimeout(() => setSubmitStatus(null), 6000);
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      await new Promise((res) => setTimeout(res, 1800));
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", company: "", budget: "", timeline: "", message: "" });
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          subject: `New enquiry from ${formData.name} — SanRaf`,
+          from_name: "SanRaf Contact Form",
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || "—",
+          budget: formData.budget || "—",
+          timeline: formData.timeline || "—",
+          message: formData.message,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          budget: "",
+          timeline: "",
+          message: "",
+          botcheck: false,
+        });
+      } else {
+        setErrorMessage(
+          data.message || "Something went wrong. Please try again.",
+        );
+        setSubmitStatus("error");
+      }
     } catch {
+      setErrorMessage(
+        "Couldn't reach our servers. Please try again or email us directly.",
+      );
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setSubmitStatus(null), 6000);
     }
   };
+  const validateForm = (data) => {
+    if (!data.name.trim() || data.name.trim().length < 2)
+      return "Please enter your name.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
+      return "Please enter a valid email.";
+    if (!data.message.trim() || data.message.trim().length < 10)
+      return "Message should be at least 10 characters.";
+    return null;
+  };
 
   return (
     <div className="min-h-screen bg-paper font-body">
-
       {/* ══════════ HERO ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
@@ -122,12 +186,15 @@ const Contact = () => {
               </span>
               <h1 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,1.3rem+3.8vw,4rem)] font-medium leading-[1.05] tracking-tight text-ink">
                 Tell us what you're{" "}
-                <span className="border-b-2 border-accent pb-0.5">building</span>.
+                <span className="border-b-2 border-accent pb-0.5">
+                  building
+                </span>
+                .
               </h1>
               <p className="mt-6 max-w-[52ch] text-[clamp(1.02rem,1rem+0.4vw,1.2rem)] leading-[1.55] text-graphite">
-                Whether you have a detailed brief or just an idea, the best
-                next step is a conversation. Fill out the form and we'll come
-                back within 24 hours with a clear response — not a sales pitch.
+                Whether you have a detailed brief or just an idea, the best next
+                step is a conversation. Fill out the form and we'll come back
+                within 24 hours with a clear response — not a sales pitch.
               </p>
             </div>
 
@@ -161,7 +228,6 @@ const Contact = () => {
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start">
-
             {/* ── LEFT COLUMN ── */}
             <div className="space-y-0 border border-line bg-white">
               {/* contact channels */}
@@ -175,13 +241,22 @@ const Contact = () => {
                     key={c.label}
                     className={`flex gap-4 px-5 py-5 ${i < contactInfo.length - 1 ? "border-b border-line" : ""}`}
                   >
-                    <Icon className="mt-0.5 h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
+                    <Icon
+                      className="mt-0.5 h-4 w-4 flex-none text-accent"
+                      strokeWidth={1.6}
+                    />
                     <div>
-                      <p className="font-mono text-[0.68rem] text-faint">{c.label}</p>
+                      <p className="font-mono text-[0.68rem] text-faint">
+                        {c.label}
+                      </p>
                       {c.details.map((d) => (
-                        <p key={d} className="mt-0.5 text-[0.92rem] text-ink">{d}</p>
+                        <p key={d} className="mt-0.5 text-[0.92rem] text-ink">
+                          {d}
+                        </p>
                       ))}
-                      <p className="mt-1 font-mono text-[0.68rem] text-graphite">{c.note}</p>
+                      <p className="mt-1 font-mono text-[0.68rem] text-graphite">
+                        {c.note}
+                      </p>
                     </div>
                   </div>
                 );
@@ -198,7 +273,10 @@ const Contact = () => {
                     key={p.text}
                     className={`flex items-center gap-3 px-5 py-4 ${i < promises.length - 1 ? "border-b border-line" : ""}`}
                   >
-                    <Icon className="h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
+                    <Icon
+                      className="h-4 w-4 flex-none text-accent"
+                      strokeWidth={1.6}
+                    />
                     <span className="text-[0.9rem] text-ink">{p.text}</span>
                   </div>
                 );
@@ -228,7 +306,10 @@ const Contact = () => {
                     exit={{ opacity: 0 }}
                     className="flex items-start gap-3 border-b border-line bg-green-50 px-6 py-4"
                   >
-                    <CheckCircle className="mt-0.5 h-4 w-4 flex-none text-green-600" strokeWidth={1.8} />
+                    <CheckCircle
+                      className="mt-0.5 h-4 w-4 flex-none text-green-600"
+                      strokeWidth={1.8}
+                    />
                     <div>
                       <p className="font-display text-[0.95rem] font-medium text-green-800">
                         Message sent successfully
@@ -246,13 +327,17 @@ const Contact = () => {
                     exit={{ opacity: 0 }}
                     className="flex items-start gap-3 border-b border-line bg-red-50 px-6 py-4"
                   >
-                    <AlertCircle className="mt-0.5 h-4 w-4 flex-none text-red-600" strokeWidth={1.8} />
+                    <AlertCircle
+                      className="mt-0.5 h-4 w-4 flex-none text-red-600"
+                      strokeWidth={1.8}
+                    />
                     <div>
                       <p className="font-display text-[0.95rem] font-medium text-red-800">
                         Something went wrong
                       </p>
                       <p className="font-mono text-[0.72rem] text-red-700">
-                        Please try again or email us directly at support@sanraf.dev
+                        Please try again or email us directly at
+                        support@sanraf.dev
                       </p>
                     </div>
                   </motion.div>
@@ -260,6 +345,21 @@ const Contact = () => {
               </AnimatePresence>
 
               <form onSubmit={handleSubmit} className="divide-y divide-line">
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  checked={formData.botcheck}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      botcheck: e.target.checked,
+                    }))
+                  }
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
                 {/* row 1 */}
                 <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
                   <div className="border-r-0 p-6 sm:border-r sm:border-line">
@@ -267,8 +367,12 @@ const Contact = () => {
                       full name <span className="text-accent">*</span>
                     </label>
                     <input
-                      type="text" id="name" name="name" required
-                      value={formData.name} onChange={handleChange}
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
                       placeholder="Your full name"
                       className={inputClass}
                     />
@@ -278,8 +382,12 @@ const Contact = () => {
                       email address <span className="text-accent">*</span>
                     </label>
                     <input
-                      type="email" id="email" name="email" required
-                      value={formData.email} onChange={handleChange}
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
                       placeholder="you@company.com"
                       className={inputClass}
                     />
@@ -293,8 +401,11 @@ const Contact = () => {
                       company
                     </label>
                     <input
-                      type="text" id="company" name="company"
-                      value={formData.company} onChange={handleChange}
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
                       placeholder="Your company (optional)"
                       className={inputClass}
                     />
@@ -304,13 +415,17 @@ const Contact = () => {
                       project budget
                     </label>
                     <select
-                      id="budget" name="budget"
-                      value={formData.budget} onChange={handleChange}
+                      id="budget"
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
                       className={inputClass}
                     >
                       <option value="">Select a range</option>
                       {budgetOptions.map((o) => (
-                        <option key={o} value={o}>{o}</option>
+                        <option key={o} value={o}>
+                          {o}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -322,13 +437,17 @@ const Contact = () => {
                     project timeline
                   </label>
                   <select
-                    id="timeline" name="timeline"
-                    value={formData.timeline} onChange={handleChange}
+                    id="timeline"
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleChange}
                     className={inputClass}
                   >
                     <option value="">Select a timeline</option>
                     {timelineOptions.map((o) => (
-                      <option key={o} value={o}>{o}</option>
+                      <option key={o} value={o}>
+                        {o}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -339,8 +458,12 @@ const Contact = () => {
                     project details <span className="text-accent">*</span>
                   </label>
                   <textarea
-                    id="message" name="message" required rows={6}
-                    value={formData.message} onChange={handleChange}
+                    id="message"
+                    name="message"
+                    required
+                    rows={6}
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Tell us about your project — what you're building, what problem it solves, and any technical requirements you have in mind."
                     className={`${inputClass} resize-none`}
                   />
@@ -350,7 +473,10 @@ const Contact = () => {
                 <div className="flex items-center justify-between gap-4 px-6 py-5">
                   <p className="font-mono text-[0.68rem] text-faint">
                     By submitting you agree to our{" "}
-                    <a href="#" className="border-b border-faint transition hover:text-ink">
+                    <a
+                      href="/privacy-policy"
+                      className="border-b border-faint transition hover:text-ink"
+                    >
                       privacy policy
                     </a>
                     .
@@ -384,9 +510,21 @@ const Contact = () => {
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-14 md:py-16">
           <div className="grid gap-8 sm:grid-cols-3">
             {[
-              { icon: Clock,   label: "business hours", lines: ["Mon–Fri: 9:00–19:00 IST", "Sat–Sun: Closed"] },
-              { icon: MapPin,  label: "office address",  lines: ["123 Tech Park", "Dibrugarh, Assam — 786001, India"] },
-              { icon: Mail,    label: "direct email",    lines: ["support@sanraf.dev", "hello@sanraf.dev"] },
+              {
+                icon: Clock,
+                label: "business hours",
+                lines: ["Mon–Fri: 9:00–19:00 IST", "Sat–Sun: Closed"],
+              },
+              {
+                icon: MapPin,
+                label: "office address",
+                lines: ["123 Tech Park", "Dibrugarh, Assam — 786001, India"],
+              },
+              {
+                icon: Mail,
+                label: "direct email",
+                lines: ["support@sanraf.dev", "hello@sanraf.dev"],
+              },
             ].map(({ icon: Icon, label, lines }) => (
               <div key={label} className="border border-line bg-white p-6">
                 <div className="flex items-center gap-2 font-mono text-[0.72rem] text-faint">
@@ -395,7 +533,9 @@ const Contact = () => {
                 </div>
                 <div className="mt-3 space-y-1">
                   {lines.map((l) => (
-                    <p key={l} className="text-[0.92rem] text-ink">{l}</p>
+                    <p key={l} className="text-[0.92rem] text-ink">
+                      {l}
+                    </p>
                   ))}
                 </div>
               </div>
@@ -403,7 +543,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };

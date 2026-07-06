@@ -3,19 +3,19 @@ import { motion } from "framer-motion";
 const testimonials = [
   {
     quote:
-      "The team built our e-commerce platform with flawless performance and a stunning UI. Sales grew by 60% in just 3 months.",
+      "They rebuilt our e-commerce store from the ground up. Page load times dropped by 3x and sales grew 60% in the first three months. The design finally matches the brand.",
     author: "Arjun Mehta",
     company: "Trendify Stores",
   },
   {
     quote:
-      "They delivered our custom SaaS product on time with zero downtime. Their expertise in scaling applications is top-notch.",
+      "Our new marketing site loads instantly, ranks on the first page for our core keywords, and lead volume has doubled. The SEO work under the hood is genuinely thorough.",
     author: "Sophia Williams",
     company: "CloudCore Solutions",
   },
   {
     quote:
-      "From mobile app development to backend integration, they handled everything with professionalism and innovation.",
+      "They designed and built our web app end to end — clean UI, solid backend, and rock-solid performance. Ongoing maintenance has been just as smooth as the build.",
     author: "Ravi Sharma",
     company: "FitLife Wellness",
   },
@@ -37,8 +37,8 @@ const Testimonials = () => {
             </h2>
           </div>
           <p className="max-w-[32ch] text-graphite">
-            Partners across retail, SaaS, and health on what shipping with us was
-            actually like.
+            Partners across retail, SaaS, and wellness on what launching a site
+            with us was actually like.
           </p>
         </div>
 
