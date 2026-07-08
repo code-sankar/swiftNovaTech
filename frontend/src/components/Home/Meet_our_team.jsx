@@ -4,102 +4,73 @@ import { Github, Linkedin, Twitter, Mail, X } from "lucide-react";
 
 const team = [
   {
-    name: "Sankar Raj",
-    title: "Senior Full Stack Developer",
-    specialty: "MERN Stack, Cloud Deployment",
-    experience: "8 years",
-    bio: "Passionate about building scalable applications and mentoring junior developers. Specialized in robust full-stack solutions.",
-    skills: ["React", "Node.js", "MongoDB", "AWS", "Docker"],
-    achievements: ["Top Performer 2023", "5+ Major Projects"],
+    name: "Sankar", // TODO: full name
+    title: "Founder & Full-Stack Developer",
+    specialty: "React, Node.js, end-to-end web builds",
+    experience: "TODO yrs", // TODO
+    bio: "Leads projects from first wireframe to launch, and is the main point of contact for clients.", // TODO: personalise
+    skills: ["React", "Next.js", "Node.js", "PostgreSQL", "Tailwind"],
+    achievements: ["30+ websites shipped"], // TODO: verify
     social: {
-      github: "https://github.com/sankar",
-      linkedin: "https://linkedin.com/in/sankar",
-      twitter: "https://twitter.com/sankar",
-      email: "mailto:sankar@example.com",
+      github: "#",   // TODO
+      linkedin: "#", // TODO
+      twitter: "#",  // TODO
+      email: "mailto:sankar@swiftnova.dev", // TODO: real mailbox on new domain
     },
   },
   {
-    name: "Priya Sharma",
+    name: "Rafel", // TODO: full name
+    title: "Co-Founder & Backend Developer",
+    specialty: "APIs, databases, integrations",
+    experience: "TODO yrs", // TODO
+    bio: "Owns the server side — APIs, data, and the integrations that keep client sites running.", // TODO: personalise
+    skills: ["Node.js", "Express", "PostgreSQL", "REST APIs", "Docker"],
+    achievements: ["TODO"], // TODO
+    social: {
+      github: "#",   // TODO
+      linkedin: "#", // TODO
+      twitter: "#",  // TODO
+      email: "mailto:rafel@swiftnova.dev", // TODO: real mailbox
+    },
+  },
+  // ─── Optional placeholder rows — fill in real teammates or DELETE ───
+  {
+    name: "TODO: Frontend dev",
     title: "Frontend Developer",
-    specialty: "React, Next.js, Tailwind",
-    experience: "5 years",
-    bio: "Crafting beautiful, responsive interfaces with attention to user experience and performance optimization.",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-    achievements: ["UI Excellence Award", "3+ Enterprise Apps"],
-    social: {
-      github: "https://github.com/priya",
-      linkedin: "https://linkedin.com/in/priya",
-      twitter: "https://twitter.com/priya",
-      email: "mailto:priya@example.com",
-    },
+    specialty: "UI engineering, performance",
+    experience: "TODO yrs",
+    bio: "TODO",
+    skills: ["React", "TypeScript", "Tailwind", "Framer Motion"],
+    achievements: ["TODO"],
+    social: { github: "#", linkedin: "#", twitter: "#", email: "#" }, // TODO
   },
   {
-    name: "Arun Kumar",
-    title: "Backend Developer",
-    specialty: "Node.js, Express, Databases",
-    experience: "6 years",
-    bio: "Building robust server architectures and optimizing database performance for high-traffic applications.",
-    skills: ["Node.js", "PostgreSQL", "Redis", "Microservices", "REST APIs"],
-    achievements: ["Backend Innovation", "10M+ Requests Handled"],
-    social: {
-      github: "https://github.com/arun",
-      linkedin: "https://linkedin.com/in/arun",
-      twitter: "https://twitter.com/arun",
-      email: "mailto:arun@example.com",
-    },
+    name: "TODO: Designer",
+    title: "Web & UI/UX Designer",
+    specialty: "Interface design, design systems",
+    experience: "TODO yrs",
+    bio: "TODO",
+    skills: ["Figma", "UI Design", "Prototyping", "Design Systems", "Accessibility"],
+    achievements: ["TODO"],
+    social: { github: "#", linkedin: "#", twitter: "#", email: "#" }, // TODO
   },
   {
-    name: "Neha Patel",
-    title: "UI/UX Designer",
-    specialty: "Figma, Adobe XD, Prototyping",
-    experience: "7 years",
-    bio: "Creating intuitive designs that balance aesthetics and functionality while ensuring exceptional user experiences.",
-    skills: ["Figma", "User Research", "Prototyping", "Design Systems", "UX Writing"],
-    achievements: ["Design Excellence", "15+ Happy Clients"],
-    social: {
-      github: "https://github.com/neha",
-      linkedin: "https://linkedin.com/in/neha",
-      twitter: "https://twitter.com/neha",
-      email: "mailto:neha@example.com",
-    },
-  },
-  {
-    name: "Rahul Verma",
-    title: "DevOps Engineer",
-    specialty: "AWS, Docker, Kubernetes",
-    experience: "9 years",
-    bio: "Automating deployments and ensuring system reliability at scale with cutting-edge DevOps practices.",
-    skills: ["AWS", "Kubernetes", "Terraform", "CI/CD", "Monitoring"],
-    achievements: ["99.9% Uptime", "Cost Optimization 40%"],
-    social: {
-      github: "https://github.com/rahul",
-      linkedin: "https://linkedin.com/in/rahul",
-      twitter: "https://twitter.com/rahul",
-      email: "mailto:rahul@example.com",
-    },
-  },
-  {
-    name: "Ananya Singh",
-    title: "Mobile App Developer",
-    specialty: "React Native, Flutter",
-    experience: "6 years",
-    bio: "Building cross-platform mobile experiences that feel native and deliver outstanding performance.",
-    skills: ["React Native", "Flutter", "iOS", "Android", "Firebase"],
-    achievements: ["50K+ Downloads", "4.8★ App Store Rating"],
-    social: {
-      github: "https://github.com/ananya",
-      linkedin: "https://linkedin.com/in/ananya",
-      twitter: "https://twitter.com/ananya",
-      email: "mailto:ananya@example.com",
-    },
+    name: "TODO: SEO/support",
+    title: "SEO & Maintenance Specialist",
+    specialty: "Technical SEO, performance, ongoing support",
+    experience: "TODO yrs",
+    bio: "TODO",
+    skills: ["Technical SEO", "Core Web Vitals", "Analytics", "Content"],
+    achievements: ["TODO"],
+    social: { github: "#", linkedin: "#", twitter: "#", email: "#" }, // TODO
   },
 ];
 
 const filters = [
-  { id: "all", label: "All team" },
+  { id: "all",       label: "All team" },
   { id: "developer", label: "Developers" },
-  { id: "design", label: "Designers" },
-  { id: "engineer", label: "Engineers" },
+  { id: "design",    label: "Design" },
+  { id: "seo",       label: "SEO & Support" },
 ];
 
 const initials = (name) =>

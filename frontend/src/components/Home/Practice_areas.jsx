@@ -2,98 +2,68 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
   Code2,
-  Smartphone,
-  Cloud,
-  Database,
-  BrainCircuit,
+  ShoppingCart,
+  AppWindow,
+  Layers,
   Palette,
-  Lock,
-  Blocks,
-  Bug,
+  LineChart,
   ArrowUpRight,
 } from "lucide-react";
-
+ 
 const practiceAreas = [
   {
     icon: Code2,
-    title: "Web Development",
+    title: "Custom Web Development",
     path: "/web",
     description:
-      "Responsive, fast, and scalable web applications built with modern frameworks like React, Next.js, and Node.js.",
-    features: ["PWAs", "SEO", "Performance", "API Integration"],
-    projects: 45,
+      "Responsive, fast, standards-based websites built with React, Next.js, and modern tooling — from marketing sites to complex frontends.",
+    features: ["React / Next.js", "Performance", "SEO-ready", "API Integration"],
+    projects: 20,
   },
   {
-    icon: Smartphone,
-    title: "Mobile App Development",
-    path: "/apps",
+    icon: ShoppingCart,
+    title: "E-commerce Development",
+    path: "/ecommerce",
     description:
-      "Cross-platform and native apps with seamless performance and exceptional user experiences.",
-    features: ["iOS & Android", "React Native", "Flutter", "App Store"],
-    projects: 32,
-  },
-  {
-    icon: Cloud,
-    title: "Cloud Solutions",
-    path: "/cloud",
-    description:
-      "End-to-end cloud services including migration, DevOps automation, and scalable infrastructure.",
-    features: ["AWS/Azure/GCP", "Microservices", "Containers", "Auto-scaling"],
-    projects: 28,
-  },
-  {
-    icon: Database,
-    title: "Data & Analytics",
-    path: "/analytics",
-    description:
-      "Turning raw data into actionable insights with AI-driven dashboards, analytics, and ML models.",
-    features: ["Big Data", "Real-time", "BI", "Visualization"],
-    projects: 36,
-  },
-  {
-    icon: BrainCircuit,
-    title: "AI & Machine Learning",
-    path: "/ai",
-    description:
-      "Custom AI solutions — chatbots, recommendation systems, and predictive analytics that boost efficiency.",
-    features: ["Computer Vision", "NLP", "Predictive Models", "AI Integration"],
-    projects: 24,
-  },
-  {
-    icon: Palette,
-    title: "UI/UX Design",
-    path: "/design",
-    description:
-      "Intuitive, user-friendly interfaces with pixel-perfect designs and delightful, tested experiences.",
-    features: ["User Research", "Prototyping", "Design Systems", "Handoff"],
-    projects: 40,
-  },
-  {
-    icon: Lock,
-    title: "Cybersecurity",
-    path: "/cybersecurity",
-    description:
-      "Security assessments, penetration testing, and compliance to keep your systems and data protected.",
-    features: ["Pen Testing", "Audits", "Compliance", "Monitoring"],
-    projects: 18,
-  },
-  {
-    icon: Blocks,
-    title: "Blockchain Solutions",
-    path: "/blockchain",
-    description:
-      "Smart contracts, decentralized apps, and Web3 integrations built for security and transparency.",
-    features: ["Smart Contracts", "dApps", "Web3", "Audits"],
+      "Conversion-focused online stores on Shopify, WooCommerce, or headless commerce — with secure checkout and international payments.",
+    features: ["Shopify", "Headless", "Payments", "Checkout UX"],
     projects: 12,
   },
   {
-    icon: Bug,
-    title: "QA & Testing",
-    path: "/testing",
+    icon: AppWindow,
+    title: "Web Applications & SaaS",
+    path: "/web-apps",
     description:
-      "Automated and manual testing that catches issues early and keeps every release dependable.",
-    features: ["Automation", "E2E", "Load Testing", "CI Integration"],
-    projects: 30,
+      "Custom web apps and dashboards with authentication, real-time data, and an architecture that scales as you grow.",
+    features: ["Dashboards", "Auth", "Real-time", "Scalable"],
+    projects: 10,
+  },
+  {
+    icon: Layers,
+    title: "CMS & Headless",
+    path: "/cms",
+    description:
+      "Editor-friendly sites on WordPress, Sanity, or Strapi so your team can update content without touching code.",
+    features: ["WordPress", "Sanity", "Strapi", "Headless"],
+    projects: 14,
+  },
+  {
+    icon: Palette,
+    title: "Website Design",
+    path: "/design",
+    description:
+      "Distinctive, accessible interface design — from wireframes to a polished, on-brand design system.",
+    features: ["UI / UX", "Wireframes", "Design Systems", "Accessibility"],
+    projects: 18,
+  },
+  {
+    icon: LineChart,
+    title: "Maintenance & SEO",
+    path: "/maintenance",
+    description:
+      "Ongoing updates, security patches, performance tuning, and technical SEO to keep your site fast and easy to find.",
+    features: ["Technical SEO", "Core Web Vitals", "Security", "Support"],
+    projects: 16,
   },
 ];
 

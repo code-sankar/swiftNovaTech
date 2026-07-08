@@ -17,101 +17,100 @@ import {
 /* ─── data ───────────────────────────────────────────────────── */
 
 const metrics = [
-  { icon: BarChart,    value: "150+", label: "projects completed" },
-  { icon: Zap,         value: "42%",  label: "average efficiency gain" },
-  { icon: DollarSign,  value: "$18M", label: "client ROI generated" },
-  { icon: Heart,       value: "98%",  label: "client satisfaction" },
+  { icon: BarChart, value: "30+", label: "websites shipped" },
+  { icon: Zap,      value: "60%", label: "avg. faster load times" },
+  { icon: Users,    value: "6",   label: "countries served" },
+  { icon: Heart,    value: "95%", label: "client satisfaction" },
 ];
 
 const industries = ["All", "Retail", "Healthcare", "Finance", "Education", "Logistics", "Technology"];
 
 const caseStudies = [
   {
-    title: "E-commerce Platform Redesign",
-    client: "Fashion Retailer",
+    title: "E-commerce Storefront Rebuild",
+    client: "DTC Fashion Brand", // TODO: real/approved client name
     industry: "Retail",
-    duration: "4 months",
-    team: "5 members",
+    duration: "10 weeks",
+    team: "3 members",
     challenge:
-      "Low conversion rates (1.2%), poor mobile experience, and slow load times causing high bounce rates.",
+      "Low mobile conversion, a slow product catalogue, and a clunky multi-step checkout driving cart abandonment.",
     solution:
-      "Complete UX overhaul with mobile-first design, performance optimisation, personalised recommendations, and streamlined checkout.",
+      "Headless storefront rebuilt mobile-first on Shopify, with a strict performance budget and a streamlined one-page checkout.",
     results:
-      "42% increase in conversion rate, 67% faster load times, 35% higher average order value, 28% drop in cart abandonment.",
-    technologies: ["React", "Node.js", "MongoDB", "AWS", "Stripe"],
+      "38% higher mobile conversion, load time cut from 2.6s to 0.8s, 24% drop in cart abandonment.",
+    technologies: ["Next.js", "Shopify", "Tailwind CSS", "Vercel"],
   },
   {
-    title: "Healthcare Management System",
-    client: "Medical Group",
+    title: "Clinic Website & Patient Portal",
+    client: "Multi-site Clinic", // TODO
     industry: "Healthcare",
-    duration: "6 months",
-    team: "8 members",
+    duration: "12 weeks",
+    team: "3 members",
     challenge:
-      "Inefficient patient record management, appointment scheduling bottlenecks, and HIPAA compliance risks.",
+      "An outdated site with no online booking and poor accessibility, pushing every enquiry to the phone lines.",
     solution:
-      "Custom EHR system with automated workflows, secure patient portal, telemedicine integration, and compliance tooling.",
+      "Accessible marketing site plus a secure appointment-booking portal, built to WCAG 2.1 AA from the ground up.",
     results:
-      "60% less admin time, 45% faster scheduling, 100% HIPAA compliance, 92% patient satisfaction.",
-    technologies: ["Angular", ".NET", "SQL Server", "Azure", "Twilio"],
+      "3× online bookings, full WCAG 2.1 AA compliance, 40% fewer phone enquiries.",
+    technologies: ["React", "Node.js", "PostgreSQL", "Netlify"],
   },
   {
-    title: "FinTech Mobile Application",
-    client: "Financial Startup",
+    title: "Fintech Marketing Site & Web Dashboard",
+    client: "Financial SaaS Startup", // TODO
     industry: "Finance",
-    duration: "5 months",
-    team: "6 members",
+    duration: "11 weeks",
+    team: "4 members",
     challenge:
-      "Complex financial data presentation causing confusion, low engagement, and high support volume.",
+      "A confusing product site with weak trial sign-ups and no self-serve customer dashboard.",
     solution:
-      "Intuitive mobile app with data visualisation, personalised insights, AI recommendations, and secure transaction processing.",
+      "Conversion-focused marketing site paired with a customer web dashboard — authentication, and clear data visualisation.",
     results:
-      "50K+ downloads, 4.8-star rating, 40% month-on-month growth, 75% fewer support tickets.",
-    technologies: ["React Native", "Python", "Firebase", "Plaid API", "ML"],
+      "52% more trial sign-ups, 30% lower bounce rate, noticeably faster onboarding.",
+    technologies: ["Next.js", "TypeScript", "Supabase", "Recharts"],
   },
   {
-    title: "Educational Platform Development",
-    client: "Online Learning Startup",
+    title: "Online Course Platform",
+    client: "E-learning Startup", // TODO
     industry: "Education",
-    duration: "7 months",
-    team: "10 members",
+    duration: "14 weeks",
+    team: "4 members",
     challenge:
-      "Low student engagement, high dropout rates, and difficulty scaling content delivery across regions.",
+      "Low course completion, high drop-off, and content that was painfully slow to update and scale.",
     solution:
-      "Interactive learning platform with gamification, adaptive paths, live collaboration, and multi-language support.",
+      "Headless-CMS-driven course platform with multi-language support and fast, cached content delivery.",
     results:
-      "3× course completion, 65% higher engagement, expanded to 15 countries, 200% revenue growth.",
-    technologies: ["Vue.js", "Laravel", "MySQL", "WebRTC", "Redis"],
+      "2× course completion, content shipped in 4 languages, 60% higher engagement.",
+    technologies: ["Vue.js", "Strapi", "MySQL", "Cloudflare"],
   },
   {
-    title: "Supply Chain Optimisation System",
-    client: "Manufacturing Company",
+    title: "Logistics Client Portal",
+    client: "Freight Company", // TODO
     industry: "Logistics",
-    duration: "8 months",
-    team: "12 members",
+    duration: "9 weeks",
+    team: "3 members",
     challenge:
-      "Inefficient inventory management, delivery delays, and zero real-time visibility across the supply chain.",
+      "Customers phoning in for shipment status because there was no self-serve way to track anything.",
     solution:
-      "IoT-enabled platform with predictive analytics, real-time tracking, automated replenishment, and vendor management.",
+      "Web customer portal with live shipment tracking, document downloads, and email notifications.",
     results:
-      "30% inventory cost reduction, 45% faster delivery, 99.5% order accuracy, $2.3M annual savings.",
-    technologies: ["React", "Java", "PostgreSQL", "IoT Sensors", "Tableau"],
+      "45% fewer status calls, self-serve tracking available to 100% of clients.",
+    technologies: ["React", "Node.js", "PostgreSQL", "AWS"],
   },
   {
-    title: "SaaS Productivity Suite",
-    client: "Tech Enterprise",
+    title: "SaaS Marketing Site & Docs",
+    client: "B2B SaaS Company", // TODO
     industry: "Technology",
-    duration: "9 months",
-    team: "15 members",
+    duration: "8 weeks",
+    team: "2 members",
     challenge:
-      "Disconnected tools causing workflow inefficiencies, data silos, and declining team productivity.",
+      "A slow marketing site the team couldn't update without a developer, and documentation scattered across tools.",
     solution:
-      "Integrated suite covering project management, document collaboration, communication, and analytics.",
+      "Fast Astro marketing site plus a headless CMS so marketing can publish without touching code, with integrated docs.",
     results:
-      "40% productivity increase, 70% less context switching, 500+ enterprise customers, $5M ARR year one.",
-    technologies: ["TypeScript", "NestJS", "MongoDB", "WebSockets", "Docker"],
+      "70% faster pages, non-dev publishing workflow, improved organic search rankings.",
+    technologies: ["Astro", "Sanity", "Tailwind CSS", "Vercel"],
   },
 ];
-
 /* ─── component ──────────────────────────────────────────────── */
 
 const CaseStudies = () => {

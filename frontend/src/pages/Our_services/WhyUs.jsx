@@ -77,9 +77,9 @@ const WhyUs = () => {
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
           <div className="grid gap-12 lg:grid-cols-[1.35fr_0.95fr] lg:items-end">
             <div>
-              <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
+              <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] text-faint">
                 <span className="inline-block h-px w-3.5 bg-accent" />
-                why sanraf
+                why SwiftNova
               </span>
               <h1 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,1.3rem+3.8vw,4rem)] font-medium leading-[1.05] tracking-tight text-ink">
                 A team you can hold{" "}

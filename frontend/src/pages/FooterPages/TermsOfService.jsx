@@ -6,7 +6,7 @@ import { ArrowRight, Mail, FileText } from "lucide-react";
 /* ─── data ──────────────────────────────────────────────────── */
 
 const EFFECTIVE_DATE = "1 January 2026";
-const LAST_UPDATED   = "1 January 2026";
+const LAST_UPDATED = "1 January 2026";
 
 const sections = [
   {
@@ -23,7 +23,7 @@ const sections = [
     num: "02",
     title: "Services we provide",
     body: [
-      `SanRaf provides software engineering services including — but not limited to — custom web and mobile application development, UI/UX design, cloud engineering, DevOps, AI integration, cybersecurity consulting, and ongoing maintenance and support.`,
+      `SwiftNova provides web design and development services including custom website development, e-commerce, web applications, CMS and headless builds, website design, and ongoing maintenance and SEO.`,
       `The specific scope, deliverables, timeline, and price for any engagement are defined in a separate Statement of Work ("SOW") or written proposal signed by both parties. In the event of a conflict between these Terms and a signed SOW, the SOW governs for that engagement.`,
     ],
   },
@@ -132,7 +132,7 @@ const TermsOfService = () => {
           if (entry.isIntersecting) setActiveId(entry.target.id);
         });
       },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
     );
 
     sections.forEach((s) => {
@@ -145,7 +145,6 @@ const TermsOfService = () => {
 
   return (
     <div className="bg-paper font-body">
-
       {/* ══════════ HERO ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 pt-20 md:pt-28 pb-14 md:pb-20">
@@ -197,7 +196,6 @@ const TermsOfService = () => {
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
           <div className="grid gap-14 lg:grid-cols-[220px_1fr] lg:gap-20">
-
             {/* ── TOC (sticky on desktop) ── */}
             <aside className="lg:sticky lg:top-24 lg:self-start">
               <p className="mb-4 font-mono text-[0.72rem] lowercase text-faint">
@@ -327,7 +325,6 @@ const TermsOfService = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };

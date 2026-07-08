@@ -3,129 +3,101 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
   Code2,
+  Server,
+  ShoppingCart,
   Database,
-  Cloud,
-  Smartphone,
-  Brain,
-  Shield,
+  Gauge,
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
-
+ 
 /* ─── data ───────────────────────────────────────────────────── */
-
+ 
+// Aligned to brand-standard numbers (was 200+/50+/5+/99% — inflated & inconsistent).
 const stats = [
-  { value: "200+", label: "projects completed" },
-  { value: "50+",  label: "technologies used" },
-  { value: "5+",   label: "years engineering" },
-  { value: "99%",  label: "client satisfaction" },
+  { value: "30+", label: "websites shipped" },
+  { value: "25+", label: "web technologies" },
+  { value: "2+",  label: "years building for the web" },
+  { value: "95%", label: "client satisfaction" },
 ];
-
+ 
 const techStack = [
   {
     category: "Frontend",
     icon: Code2,
     description:
-      "Modern, responsive interfaces with exceptional performance and user experience.",
-    features: ["SSR / SSG", "PWA", "SEO Optimisation", "Performance Tuning"],
+      "Fast, responsive, accessible interfaces — the layer your visitors actually see and feel.",
+    features: ["SSR / SSG", "PWA", "SEO-ready", "Performance Tuning"],
     technologies: [
-      { name: "React",        level: "Expert",       projects: 45 },
-      { name: "Angular",      level: "Advanced",     projects: 28 },
-      { name: "Vue.js",       level: "Advanced",     projects: 32 },
-      { name: "TypeScript",   level: "Expert",       projects: 67 },
-      { name: "Next.js",      level: "Expert",       projects: 52 },
-      { name: "Tailwind CSS", level: "Expert",       projects: 89 },
-      { name: "Svelte",       level: "Intermediate", projects: 18 },
-      { name: "Nuxt.js",      level: "Advanced",     projects: 24 },
+      { name: "React",        level: "Expert",       projects: 30 },
+      { name: "Next.js",      level: "Expert",       projects: 22 },
+      { name: "Vue.js",       level: "Advanced",     projects: 12 },
+      { name: "TypeScript",   level: "Expert",       projects: 26 },
+      { name: "Tailwind CSS", level: "Expert",       projects: 28 },
+      { name: "Astro",        level: "Advanced",     projects: 9  },
     ],
   },
   {
-    category: "Backend",
+    category: "Backend & APIs",
+    icon: Server,
+    description:
+      "Reliable server-side logic and clean APIs that power the sites and apps we build.",
+    features: ["REST APIs", "GraphQL", "Auth", "Integrations"],
+    technologies: [
+      { name: "Node.js", level: "Expert",       projects: 27 },
+      { name: "Express", level: "Expert",       projects: 24 },
+      { name: "Python",  level: "Advanced",     projects: 14 },
+      { name: "FastAPI", level: "Advanced",     projects: 9  },
+      { name: "GraphQL", level: "Advanced",     projects: 11 },
+      { name: "REST",    level: "Expert",       projects: 30 },
+    ],
+  },
+  {
+    category: "CMS & E-commerce",
+    icon: ShoppingCart,
+    description:
+      "Editor-friendly content and storefronts your team can run without touching code.",
+    features: ["Headless CMS", "Online Stores", "Payments", "Content Modelling"],
+    technologies: [
+      { name: "WordPress",   level: "Expert",       projects: 18 },
+      { name: "Shopify",     level: "Advanced",     projects: 12 },
+      { name: "WooCommerce", level: "Advanced",     projects: 10 },
+      { name: "Sanity",      level: "Advanced",     projects: 8  },
+      { name: "Strapi",      level: "Advanced",     projects: 7  },
+      { name: "Contentful",  level: "Intermediate", projects: 5  },
+    ],
+  },
+  {
+    category: "Databases & Hosting",
     icon: Database,
     description:
-      "Scalable server-side solutions and robust API development that holds up under load.",
-    features: ["REST APIs", "Microservices", "Database Design", "API Security"],
+      "Where your data lives and how your site ships — chosen for reliability, not hype.",
+    features: ["SQL & NoSQL", "Managed Hosting", "CI/CD", "Backups"],
     technologies: [
-      { name: "Node.js",    level: "Expert",       projects: 78 },
-      { name: "Python",     level: "Expert",       projects: 65 },
-      { name: "Java",       level: "Advanced",     projects: 42 },
-      { name: "Spring Boot",level: "Advanced",     projects: 38 },
-      { name: ".NET",       level: "Intermediate", projects: 29 },
-      { name: "Express.js", level: "Expert",       projects: 71 },
-      { name: "FastAPI",    level: "Advanced",     projects: 33 },
-      { name: "GraphQL",    level: "Advanced",     projects: 47 },
+      { name: "PostgreSQL", level: "Advanced", projects: 16 },
+      { name: "MongoDB",    level: "Advanced", projects: 14 },
+      { name: "Supabase",   level: "Advanced", projects: 9  },
+      { name: "Vercel",     level: "Expert",   projects: 24 },
+      { name: "Netlify",    level: "Advanced", projects: 12 },
+      { name: "Cloudflare", level: "Advanced", projects: 15 },
     ],
   },
   {
-    category: "Mobile",
-    icon: Smartphone,
+    category: "Performance & SEO",
+    icon: Gauge,
     description:
-      "Cross-platform and native mobile applications that feel right on every device.",
-    features: ["Cross-platform", "Native Performance", "App Store Deployment", "Offline Support"],
+      "The work that makes a site fast, discoverable, and easy to maintain after launch.",
+    features: ["Core Web Vitals", "Technical SEO", "Analytics", "Accessibility"],
     technologies: [
-      { name: "React Native", level: "Expert",       projects: 56 },
-      { name: "Flutter",      level: "Advanced",     projects: 41 },
-      { name: "Swift",        level: "Intermediate", projects: 27 },
-      { name: "Kotlin",       level: "Advanced",     projects: 34 },
-      { name: "iOS",          level: "Intermediate", projects: 29 },
-      { name: "Android",      level: "Advanced",     projects: 45 },
-      { name: "Ionic",        level: "Intermediate", projects: 22 },
-      { name: "Expo",         level: "Advanced",     projects: 38 },
-    ],
-  },
-  {
-    category: "Cloud & DevOps",
-    icon: Cloud,
-    description:
-      "Infrastructure automation and cloud-native solutions that keep releases boring.",
-    features: ["Infrastructure as Code", "Auto-scaling", "Monitoring", "Disaster Recovery"],
-    technologies: [
-      { name: "AWS",         level: "Expert",       projects: 63 },
-      { name: "Azure",       level: "Advanced",     projects: 47 },
-      { name: "Google Cloud",level: "Advanced",     projects: 52 },
-      { name: "Docker",      level: "Expert",       projects: 89 },
-      { name: "Kubernetes",  level: "Advanced",     projects: 58 },
-      { name: "CI/CD",       level: "Expert",       projects: 74 },
-      { name: "Terraform",   level: "Advanced",     projects: 41 },
-      { name: "Jenkins",     level: "Intermediate", projects: 36 },
-    ],
-  },
-  {
-    category: "AI & ML",
-    icon: Brain,
-    description:
-      "Intelligent solutions powered by machine learning and data science.",
-    features: ["Predictive Analytics", "Neural Networks", "Data Processing", "Model Deployment"],
-    technologies: [
-      { name: "TensorFlow",      level: "Advanced", projects: 38 },
-      { name: "PyTorch",         level: "Advanced", projects: 42 },
-      { name: "OpenCV",          level: "Intermediate", projects: 29 },
-      { name: "NLP",             level: "Advanced", projects: 33 },
-      { name: "Computer Vision", level: "Advanced", projects: 31 },
-      { name: "Data Science",    level: "Expert",   projects: 57 },
-      { name: "Scikit-learn",    level: "Advanced", projects: 45 },
-      { name: "Pandas",          level: "Expert",   projects: 68 },
-    ],
-  },
-  {
-    category: "Cybersecurity",
-    icon: Shield,
-    description:
-      "Comprehensive security practices and threat protection built into every layer.",
-    features: ["Threat Detection", "Security Monitoring", "Risk Assessment", "Compliance"],
-    technologies: [
-      { name: "Pen Testing",            level: "Advanced",     projects: 27 },
-      { name: "Encryption",             level: "Expert",       projects: 52 },
-      { name: "Firewalls",              level: "Advanced",     projects: 44 },
-      { name: "Security Audits",        level: "Expert",       projects: 38 },
-      { name: "Compliance",             level: "Advanced",     projects: 41 },
-      { name: "SIEM",                   level: "Intermediate", projects: 23 },
-      { name: "Vulnerability Assessment",level:"Advanced",     projects: 35 },
-      { name: "Incident Response",      level: "Intermediate", projects: 28 },
+      { name: "Lighthouse",       level: "Expert",       projects: 30 },
+      { name: "Core Web Vitals",  level: "Expert",       projects: 28 },
+      { name: "Google Analytics", level: "Advanced",     projects: 22 },
+      { name: "Search Console",   level: "Advanced",     projects: 20 },
+      { name: "Schema / SEO",     level: "Advanced",     projects: 18 },
+      { name: "GTM",              level: "Intermediate", projects: 10 },
     ],
   },
 ];
-
 const levelOrder = { Expert: 0, Advanced: 1, Intermediate: 2 };
 
 /* ─── component ──────────────────────────────────────────────── */
