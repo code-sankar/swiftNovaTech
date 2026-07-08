@@ -56,7 +56,7 @@ const Hero_section = () => {
               animate="show"
               className="max-w-[52ch] text-[clamp(1.05rem,1rem+0.4vw,1.28rem)] leading-[1.55] text-graphite"
             >
-              SanRaf is a web design and development studio. We partner with
+              SwiftNova Tech Labs. is a web design and development studio. We partner with
               founders and companies to design, build, and maintain fast,
               conversion-focused websites — from marketing sites and e-commerce
               stores to full web applications.

@@ -25,6 +25,14 @@ const legalLinks = [
   ["Sitemap",          "/sitemap"],
 ];
 
+// TODO: replace "#" with real profile URLs before launch — dead social links hurt trust.
+const socials = [
+  { Icon: Facebook, href: "#", label: "SwiftNova on Facebook" },
+  { Icon: Twitter,  href: "#", label: "SwiftNova on X" },
+  { Icon: Linkedin, href: "#", label: "SwiftNova on LinkedIn" },
+  { Icon: Github,   href: "#", label: "SwiftNova on GitHub" },
+];
+
 const Footer = () => {
   const year = new Date().getFullYear();
 
@@ -36,7 +44,11 @@ const Footer = () => {
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center gap-2.5">
               <span className="grid h-[80px] w-[50px] place-items-center ">
-                <img src="https://res.cloudinary.com/dx7b8hfwm/image/upload/v1783183469/Gemini_Generated_Image_rm3dvgrm3dvgrm3d_1_1_otjrzm.png" alt="SwiftNova Logo" />
+                {/* TODO: swap placeholder for the real SwiftNova logo mark */}
+                <img
+                  src="https://res.cloudinary.com/dx7b8hfwm/image/upload/v1783183469/Gemini_Generated_Image_rm3dvgrm3dvgrm3d_1_1_otjrzm.png"
+                  alt="SwiftNova logo"
+                />
               </span>
               <span className="leading-none">
                 <span className="font-display text-[1.12rem] font-semibold tracking-tight">
@@ -49,12 +61,19 @@ const Footer = () => {
               </span>
             </Link>
             <p className="mt-4 max-w-[32ch] text-[0.9rem] leading-relaxed text-graphite">
-              Building fast, modern websites for teams that need them done
-              right — from first wireframe to launch and beyond.
+              Building fast, modern websites for teams worldwide — from first
+              wireframe to launch and beyond.
             </p>
             <div className="mt-5 flex gap-4">
-              {[Facebook, Twitter, Linkedin, Github].map((Icon, i) => (
-                <a key={i} href="#" className="text-graphite transition hover:text-accent" aria-label="social link">
+              {socials.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-graphite transition hover:text-accent"
+                  aria-label={label}
+                >
                   <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
                 </a>
               ))}
@@ -95,19 +114,22 @@ const Footer = () => {
             <ul className="space-y-3 text-[0.88rem] text-graphite">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
-                <span>123 Tech Park<br />Dibrugarh, India</span>
+                {/* TODO: add real street address if you want one shown; fine as-is for a remote-first studio */}
+                <span>Dibrugarh, Assam<br />India · remote-first</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
-                <a href="tel:+919876543210" className="transition hover:text-ink">+91 98765 xxxxx</a>
+                {/* TODO: real number — keep the +91 international format for overseas clients */}
+                <a href="tel:+910000000000" className="transition hover:text-ink">+91 XXXXX XXXXX</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
-                <a href="mailto:hello@sanraf.dev" className="transition hover:text-ink">hello@sanraf.dev</a>
+                {/* TODO: stand up this mailbox on the new domain before launch */}
+                <a href="mailto:hello@swiftnova.dev" className="transition hover:text-ink">hello@swiftnova.dev</a>
               </li>
               <li className="flex gap-3">
                 <Clock className="mt-0.5 h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
-                <span>Mon–Fri: 9:00–19:00<br />Sat–Sun: Closed</span>
+                <span>Mon–Fri · 09:00–18:00 IST<br />Overlaps EU &amp; US hours</span>
               </li>
             </ul>
           </div>
@@ -115,7 +137,7 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <div className="flex flex-col justify-between gap-3 border-t border-line py-6 font-mono text-[0.72rem] text-faint sm:flex-row">
-          <p>© {year} SwiftNova Tech. All rights reserved.</p>
+          <p>© {year} SwiftNova — Sankar &amp; Rafel Software Solutions. All rights reserved.</p>
           <div className="flex flex-wrap gap-5">
             {legalLinks.map(([label, href]) => (
               <Link key={label} to={href} className="transition hover:text-ink">

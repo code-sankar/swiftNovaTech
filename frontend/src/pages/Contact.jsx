@@ -17,47 +17,67 @@ import {
 
 /* ─── data ───────────────────────────────────────────────────── */
 
+/*
+  Contact.jsx — DATA BLOCK ONLY  (SwiftNova / swiftnova.dev)
+
+  Replace your existing const declarations (from `const contactInfo` down to
+  `const timelineOptions`) with everything below. Do NOT touch the component,
+  handleSubmit, validation, or Web3Forms logic — none of that changes.
+
+  Reuses the MessageCircle icon you already import (old "live chat" card),
+  now repurposed as WhatsApp — so no import changes needed.
+
+  NOTE: emails assume swiftnova.dev. If you registered a different TLD,
+  substitute it here and everywhere else.
+*/
+
 const contactInfo = [
   {
     icon: Mail,
     label: "email",
-    details: ["support@sanraf.dev", "hello@sanraf.dev"],
-    note: "Reply within 2 hours",
+    details: ["hello@swiftnova.dev", "support@swiftnova.dev"],
+    note: "Reply within 24 hours",
   },
   {
     icon: Phone,
     label: "phone",
-    details: ["+91 98765 43210", "+91 91234 56789"],
-    note: "Mon–Fri, 09:00–18:00 IST",
-  },
-  {
-    icon: MapPin,
-    label: "office",
-    details: ["123 Tech Park", "Dibrugarh, Assam — 786001"],
-    note: "Schedule a visit first",
+    // TODO: real number — keep +91 international format so overseas clients can dial it
+    details: ["+91 XXXXX XXXXX"],
+    note: "Mon–Fri · 09:00–18:00 IST — overlaps EU mornings & US evenings",
   },
   {
     icon: MessageCircle,
-    label: "live chat",
-    details: ["Available 24/7", "Instant support"],
-    note: "Use the chat widget below",
+    label: "whatsapp",
+    // Honest replacement for the old "live chat 24/7" card (the widget didn't exist).
+    // WhatsApp is trusted by international clients and needs no widget.
+    details: ["Chat with us directly"],
+    note: "Fastest reply — TODO: add wa.me/91XXXXXXXXXX link on the card",
+  },
+  {
+    icon: MapPin,
+    label: "based in",
+    details: ["Dibrugarh, Assam, India"],
+    note: "Remote-first · working with clients worldwide",
   },
 ];
 
 const promises = [
-  { icon: Zap, text: "24–48 hour response time" },
+  { icon: Zap, text: "Reply within 24 hours" },
   { icon: Award, text: "Free project consultation" },
   { icon: CheckCircle, text: "No-obligation quote" },
   { icon: Star, text: "Dedicated project manager" },
 ];
 
+// Aligned to your brand-standard stats (no more 200+/50+/5.0 contradiction).
+// "6 countries" leans into the foreign-client focus.
 const quickStats = [
   { value: "24h", label: "response time" },
-  { value: "200+", label: "projects done" },
-  { value: "50+", label: "happy clients" },
-  { value: "5.0★", label: "average rating" },
+  { value: "30+", label: "websites shipped" },
+  { value: "6",   label: "countries served" },
+  { value: "95%", label: "client satisfaction" },
 ];
 
+// Budgets already in USD — correct for overseas clients. Left unchanged.
 const budgetOptions = [
   "Less than $1,000",
   "$1,000 – $5,000",
@@ -73,7 +93,6 @@ const timelineOptions = [
   "6–12 months",
   "More than 1 year",
 ];
-
 const inputClass =
   "w-full border border-line bg-paper px-4 py-3 font-body text-[0.95rem] text-ink placeholder:text-faint focus:border-accent focus:bg-white focus:outline-none transition-colors";
 
