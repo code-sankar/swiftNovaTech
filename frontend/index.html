@@ -2,15 +2,119 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dx7b8hfwm/image/upload/v1783183469/Gemini_Generated_Image_rm3dvgrm3dvgrm3d_1_1_otjrzm.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ═══════════ PRIMARY ═══════════ -->
+    <title>SwiftNova — Web Design &amp; Development Studio</title>
+    <meta
+      name="description"
+      content="SwiftNova is a web design and development studio building fast, conversion-focused websites, e-commerce stores, and web apps for companies worldwide."
+    />
+    <link rel="canonical" href="https://swiftnova.dev/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#1A1D23" />
+
+    <!-- ═══════════ ICONS ═══════════ -->
+    <!-- TODO: replace with the real SwiftNova mark. Ship these four files in public/:
+         favicon.ico (32x32), icon.svg, apple-touch-icon.png (180x180), og.png (1200x630) -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- ═══════════ OPEN GRAPH ═══════════ -->
+    <!-- Static, sitewide. Social crawlers don't run JS, so these are what
+         LinkedIn / WhatsApp / Slack / iMessage actually read. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SwiftNova" />
+    <meta property="og:url" content="https://swiftnova.dev/" />
+    <meta property="og:title" content="SwiftNova — Web Design &amp; Development Studio" />
+    <meta
+      property="og:description"
+      content="We design, build, and maintain fast, conversion-focused websites — from marketing sites and e-commerce stores to full web applications."
+    />
+    <meta property="og:image" content="https://swiftnova.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SwiftNova — web design and development studio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ═══════════ TWITTER / X ═══════════ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SwiftNova — Web Design &amp; Development Studio" />
+    <meta
+      name="twitter:description"
+      content="We design, build, and maintain fast, conversion-focused websites — from marketing sites and e-commerce stores to full web applications."
+    />
+    <meta name="twitter:image" content="https://swiftnova.dev/og.png" />
+    <!-- TODO: add once the account exists — <meta name="twitter:site" content="@swiftnova" /> -->
+
+    <!-- ═══════════ FONTS ═══════════ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>SwiftNova</title>
+
+    <!-- ═══════════ STRUCTURED DATA ═══════════ -->
+    <!-- Static so every crawler sees it, JS-rendering or not.
+         Deliberately NO aggregateRating: Google issues manual actions for
+         review markup that isn't backed by real, verifiable reviews. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://swiftnova.dev/#organization",
+            "name": "SwiftNova",
+            "legalName": "Sankar & Rafel Software Solutions",
+            "url": "https://swiftnova.dev/",
+            "email": "hello@swiftnova.dev",
+            "description": "Web design and development studio building fast, conversion-focused websites, e-commerce stores, and web applications for clients worldwide.",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://swiftnova.dev/icon.svg"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Dibrugarh",
+              "addressRegion": "Assam",
+              "postalCode": "786001",
+              "addressCountry": "IN"
+            },
+            "areaServed": {
+              "@type": "Place",
+              "name": "Worldwide"
+            },
+            "knowsAbout": [
+              "Web development",
+              "E-commerce development",
+              "Web applications",
+              "Headless CMS",
+              "UI/UX design",
+              "Technical SEO"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://swiftnova.dev/#website",
+            "url": "https://swiftnova.dev/",
+            "name": "SwiftNova",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://swiftnova.dev/#organization" }
+          }
+        ]
+      }
+    </script>
+    <!--
+      TODO before launch, add to the Organization node once each exists:
+        "telephone": "+91XXXXXXXXXX",
+        "sameAs": ["https://www.linkedin.com/company/...", "https://github.com/..."],
+        "vatID" or "taxID": "<GSTIN>",   ← overseas buyers check this
+        "foundingDate": "2024-01-01"
+      Omit any field you cannot back. An empty sameAs array is worse than none.
+    -->
   </head>
   <body>
     <div id="root"></div>

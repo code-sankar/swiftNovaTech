@@ -39,7 +39,7 @@ const sections = [
     title: "Introduction",
     icon: BookOpen,
     body: [
-      "Sankar & Rafel Software Solutions (\u201cSanRaf\u201d, \u201cwe\u201d, \u201cour\u201d, or \u201cus\u201d) operates the website sanraf.dev and provides software development services to clients worldwide. This policy explains what personal information we collect, why we collect it, and how we handle it.",
+      "SwiftNova Tech Labs (\u201cSwiftNova\u201d, \u201cwe\u201d, \u201cour\u201d, or \u201cus\u201d) operates the website sanraf.dev and provides software development services to clients worldwide. This policy explains what personal information we collect, why we collect it, and how we handle it.",
       "It applies to visitors of our website, prospects who contact us, and clients we work with. It is written in plain English on purpose \u2014 if anything here is unclear, email us and we\u2019ll explain.",
     ],
   },

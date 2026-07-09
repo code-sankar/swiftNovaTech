@@ -35,14 +35,14 @@ const contactInfo = [
   {
     icon: Mail,
     label: "email",
-    details: ["hello@swiftnova.dev", "support@swiftnova.dev"],
+    details: ["info@swiftnovatechlabs.com"],
     note: "Reply within 24 hours",
   },
   {
     icon: Phone,
     label: "phone",
     // TODO: real number — keep +91 international format so overseas clients can dial it
-    details: ["+91 XXXXX XXXXX"],
+    details: ["+91 7842043469"],
     note: "Mon–Fri · 09:00–18:00 IST — overlaps EU mornings & US evenings",
   },
   {
@@ -51,12 +51,12 @@ const contactInfo = [
     // Honest replacement for the old "live chat 24/7" card (the widget didn't exist).
     // WhatsApp is trusted by international clients and needs no widget.
     details: ["Chat with us directly"],
-    note: "Fastest reply — TODO: add wa.me/91XXXXXXXXXX link on the card",
+    note: "Fastest reply — 7842043469 ",
   },
   {
     icon: MapPin,
     label: "based in",
-    details: ["Dibrugarh, Assam, India"],
+    details: ["Madhurawada Area Visakhapatnam, Andhra Pradesh, India"],
     note: "Remote-first · working with clients worldwide",
   },
 ];
@@ -537,12 +537,12 @@ const Contact = () => {
               {
                 icon: MapPin,
                 label: "office address",
-                lines: ["123 Tech Park", "Dibrugarh, Assam — 786001, India"],
+                lines: ["Madhurawada Area Visakhapatnam, Andhra Pradesh, India"],
               },
               {
                 icon: Mail,
                 label: "direct email",
-                lines: ["support@sanraf.dev", "hello@sanraf.dev"],
+                lines: ["info@swiftnovatechlabs.com"],
               },
             ].map(({ icon: Icon, label, lines }) => (
               <div key={label} className="border border-line bg-white p-6">

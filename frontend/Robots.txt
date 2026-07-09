@@ -1,0 +1,11 @@
+# https://swiftnova.dev/robots.txt
+
+User-agent: *
+Allow: /
+
+# Note: /home is a duplicate of /. It is deliberately NOT disallowed here.
+# Blocking it would stop Google crawling the page, which would stop Google
+# reading the rel=canonical tag that points it back to /. Canonical only
+# works on pages a crawler is allowed to fetch.
+
+Sitemap: https://swiftnova.dev/sitemap.xml

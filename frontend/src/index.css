@@ -13,6 +13,16 @@
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body:    "Inter", system-ui, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Motion tokens — also generate `ease-brand` / `ease-brand-in` utilities */
+  --ease-brand:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-brand-in: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root {
+  --dur-fast: 150ms;
+  --dur-base: 240ms;
+  --dur-slow: 480ms;
 }
 
 body {
@@ -23,3 +33,249 @@ body {
 }
 
 ::selection { background: var(--color-accent); color: #fff; }
+
+/* Keyboard focus — square, accent, matches the hairline language. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   HOVER SYSTEM
+   Five primitives. Compose, don't invent new ones.
+   Every class is opt-in; nothing changes until you add it.
+   ══════════════════════════════════════════════════════════════ */
+
+
+/* ── 1. hov-cell ───────────────────────────────────────────────
+   For cells inside a hairline grid (services, tech, testimonials,
+   project cards). Never lifts — the grid must stay rigid. Instead:
+   the paper warms, and a 2px accent rule wipes across the top edge,
+   landing exactly on the existing hairline.
+   Pair with Tailwind's `group` so children can react.
+   ────────────────────────────────────────────────────────────── */
+.hov-cell {
+  position: relative;
+  transition: background-color var(--dur-base) var(--ease-brand);
+}
+.hov-cell::after {
+  content: "";
+  position: absolute;
+  inset: -1px auto auto 0;   /* sits on the shared hairline */
+  height: 2px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-brand);
+}
+.hov-cell:hover { background-color: var(--color-paper); }
+.hov-cell:hover::after { transform: scaleX(1); }
+
+/* Variant: rule on the left edge instead — for stacked rows / list items. */
+.hov-cell-left::after {
+  inset: 0 auto auto -1px;
+  height: 100%;
+  width: 2px;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.hov-cell-left:hover::after { transform: scaleY(1); }
+
+
+/* ── 2. hov-link ───────────────────────────────────────────────
+   Underline wipes in from the left at the exact weight of a hairline.
+   Use on nav, footer links, inline prose links, breadcrumbs.
+   For a permanently-underlined active nav item: data-active="true".
+   ────────────────────────────────────────────────────────────── */
+.hov-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: left 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition:
+    background-size var(--dur-base) var(--ease-brand),
+    color var(--dur-fast) linear;
+}
+.hov-link:hover,
+.hov-link[data-active="true"] { background-size: 100% 1px; }
+
+/* Variant: underline is already there, and *retracts* on hover.
+   Reserve for the one link you want to feel different (e.g. the logo). */
+.hov-link-out { background-size: 100% 1px; }
+.hov-link-out:hover { background-size: 0% 1px; }
+
+
+/* ── 3. hov-btn ────────────────────────────────────────────────
+   Accent fill wipes left→right beneath the label. Requires the button
+   itself to carry the border; add Tailwind's `hover:text-white`
+   (or `hover:text-paper`) so the label inverts as the fill arrives.
+   `isolation` keeps the -1 layer above the button's own background
+   but below its text — no wrapper span needed.
+   ────────────────────────────────────────────────────────────── */
+.hov-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color var(--dur-base) var(--ease-brand),
+    border-color var(--dur-base) var(--ease-brand);
+}
+.hov-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-base) var(--ease-brand);
+}
+.hov-btn:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Variant: fill rises from the baseline. For dark-section buttons. */
+.hov-btn-up::before {
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+.hov-btn-up:hover::before {
+  transform: scaleY(1);
+  transform-origin: bottom;
+}
+
+
+/* ── 4. Child reactions ────────────────────────────────────────
+   These only move when an ancestor `.group` is hovered, so a whole
+   card responds as one gesture rather than four separate effects.
+   ────────────────────────────────────────────────────────────── */
+
+/* Arrow slides. 4px — enough to read as intent, not as travel. */
+.hov-arrow {
+  transition: transform var(--dur-base) var(--ease-brand);
+}
+.group:hover .hov-arrow { transform: translateX(4px); }
+
+/* Icon takes the accent. No scale — scaling icons reads as consumer UI. */
+.hov-icon {
+  transition: color var(--dur-base) var(--ease-brand);
+}
+.group:hover .hov-icon { color: var(--color-accent); }
+
+/* Monospace index numeral steps up out of the faint tier. */
+.hov-index {
+  transition: color var(--dur-base) var(--ease-brand);
+}
+.group:hover .hov-index { color: var(--color-accent); }
+
+/* Caption/meta line reveals from 0 → full opacity + slides a hair. */
+.hov-reveal {
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity var(--dur-base) var(--ease-brand),
+    transform var(--dur-base) var(--ease-brand);
+}
+.group:hover .hov-reveal { opacity: 1; transform: none; }
+
+
+/* ── 5. hov-media ──────────────────────────────────────────────
+   Project covers and screenshots. Slow, small scale — the image
+   settles rather than pops. Duration is deliberately ~2× the others
+   so it reads as depth, not as a hover state.
+   Put `.hov-media` on the wrapper, image is the direct child.
+   ────────────────────────────────────────────────────────────── */
+.hov-media {
+  overflow: hidden;
+  background-color: var(--color-line);
+}
+.hov-media > img,
+.hov-media > video {
+  display: block;
+  width: 100%;
+  transform: scale(1);
+  transition: transform var(--dur-slow) var(--ease-brand);
+  will-change: transform;
+}
+.hov-media:hover > img,
+.hov-media:hover > video,
+.group:hover .hov-media > img,
+.group:hover .hov-media > video { transform: scale(1.035); }
+
+/* Optional: desaturate at rest, colour on hover. Editorial, but
+   only use it if every cover image survives being grey. */
+.hov-media-mono > img {
+  filter: grayscale(1) contrast(1.02);
+  transition:
+    transform var(--dur-slow) var(--ease-brand),
+    filter var(--dur-slow) var(--ease-brand);
+}
+.hov-media-mono:hover > img,
+.group:hover .hov-media-mono > img { filter: grayscale(0) contrast(1); }
+
+
+/* ── Utility: hov-row ──────────────────────────────────────────
+   FAQ triggers, table rows, sidebar nav, list items. Tint only.
+   ────────────────────────────────────────────────────────────── */
+.hov-row {
+  transition:
+    background-color var(--dur-fast) var(--ease-brand-in),
+    color var(--dur-fast) var(--ease-brand-in);
+}
+.hov-row:hover { background-color: var(--color-paper); }
+
+
+/* ── Utility: hov-stat ─────────────────────────────────────────
+   Stat cells. The number holds; an accent rule draws under it.
+   ────────────────────────────────────────────────────────────── */
+.hov-stat { position: relative; }
+.hov-stat::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-brand);
+}
+.hov-stat:hover::after { transform: scaleX(1); }
+
+
+/* ══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   Movement is removed. Colour and opacity feedback stays — killing
+   those would make the site feel broken for anyone who opted in.
+   ══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .hov-cell::after,
+  .hov-cell-left::after,
+  .hov-stat::after,
+  .hov-btn::before {
+    transition: opacity var(--dur-fast) linear;
+    transform: none;
+    opacity: 0;
+  }
+  .hov-cell:hover::after,
+  .hov-cell-left:hover::after,
+  .hov-stat:hover::after,
+  .hov-btn:hover::before { opacity: 1; }
+
+  .hov-arrow,
+  .group:hover .hov-arrow,
+  .hov-media > img,
+  .hov-media:hover > img,
+  .group:hover .hov-media > img { transform: none; }
+
+  .hov-reveal { transform: none; }
+  .group:hover .hov-reveal { transform: none; }
+
+  .hov-link { transition: color var(--dur-fast) linear; }
+}

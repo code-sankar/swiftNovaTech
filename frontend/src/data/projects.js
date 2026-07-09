@@ -38,7 +38,7 @@ export const projects = [
     nda: false,
     liveUrl: "https://example.com",       // TODO: real live URL
     repoUrl: null,
-    cover: "/projects/meridian.jpg",       // TODO: add screenshot to public/projects/
+    cover: "https://res.cloudinary.com/dx7b8hfwm/image/upload/v1783525344/Screenshot_2026-07-08_210315_qjrvf5.png",       // TODO: add screenshot to public/projects/
     gallery: [],                           // TODO: optional extra screenshots
     summary:
       "A headless Shopify + Next.js storefront serving shoppers across 14 markets, rebuilt from a slow legacy site with a zero-downtime migration.",

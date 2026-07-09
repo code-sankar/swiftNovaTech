@@ -115,17 +115,17 @@ const Footer = () => {
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
                 {/* TODO: add real street address if you want one shown; fine as-is for a remote-first studio */}
-                <span>Dibrugarh, Assam<br />India · remote-first</span>
+                <span>Madhurawada Area, Visakhapatnam<br />India · remote-first</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
                 {/* TODO: real number — keep the +91 international format for overseas clients */}
-                <a href="tel:+910000000000" className="transition hover:text-ink">+91 XXXXX XXXXX</a>
+                <a href="tel:+917842043469" className="transition hover:text-ink">+91 78420 43469</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 flex-none text-accent" strokeWidth={1.6} />
                 {/* TODO: stand up this mailbox on the new domain before launch */}
-                <a href="mailto:hello@swiftnova.dev" className="transition hover:text-ink">hello@swiftnova.dev</a>
+                <a href="mailto:info@swiftnovatechlabs.com" className="transition hover:text-ink">info@swiftnovatechlabs.com</a>
               </li>
               <li className="flex gap-3">
                 <Clock className="mt-0.5 h-4 w-4 flex-none text-accent" strokeWidth={1.6} />

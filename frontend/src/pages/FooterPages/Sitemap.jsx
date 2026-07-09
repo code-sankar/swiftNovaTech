@@ -12,7 +12,7 @@ const groups = [
     caption: "Start here — what the studio is, who runs it, and how to reach us.",
     items: [
       { n: "01", path: "/",        title: "Home",        desc: "Studio overview and capability index" },
-      { n: "02", path: "/whyUs",   title: "Why SanRaf",  desc: "How we work and what we optimise for" },
+      { n: "02", path: "/whyUs",   title: "Why SwiftNova",  desc: "How we work and what we optimise for" },
       { n: "03", path: "/contact", title: "Contact",     desc: "Start a project or ask a question" },
     ],
   },
@@ -93,7 +93,7 @@ const Sitemap = () => {
             </h1>
 
             <p className="mt-6 max-w-[58ch] text-[1rem] leading-relaxed text-graphite">
-              A flat index of everything published on the SanRaf site — grouped
+              A flat index of everything published on the SwiftNova Tech Labs site — grouped
               the way we think about it internally. Handy if you're looking for
               something specific, or want to see the studio's surface area at a
               glance.

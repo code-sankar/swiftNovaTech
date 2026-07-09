@@ -47,8 +47,8 @@ const Navbar = () => {
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
           <div className="flex h-9 items-center justify-between gap-4 font-mono text-[0.72rem] text-faint">
             <div className="flex gap-6 flex-wrap">
-              <span>support@sanraf.dev</span>
-              <span className="hidden sm:inline">Dibrugarh · India</span>
+              <span>info@swiftnovatechlabs.com</span>
+              <span className="hidden sm:inline">Visakhapatnam · India</span>
               <span className="hidden md:inline">Mon–Fri, 09:00–18:00 IST</span>
             </div>
             <span className="flex items-center gap-2 text-graphite">

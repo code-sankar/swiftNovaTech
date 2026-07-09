@@ -6,7 +6,7 @@ import App from "./App.jsx";
 
 // ─── Service pages (the six web services) ───
 import WebDevelopment from "./pages/Our_services/webdev.jsx";       // /web
-import Ecommerce from "./pages/Our_services/cms.jsx";              // /ecommerce  ⚠️ TEMPORARY: see TODO below
+import Ecommerce from "./pages/Our_services/Ecommerce.jsx";              // /ecommerce  ⚠️ TEMPORARY: see TODO below
 import WebApps from "./pages/Our_services/wenApps.jsx";            // /web-apps  (TODO: rename file -> webApps.jsx)
 import CMS from "./pages/Our_services/cms.jsx";                     // /cms
 import UIUXDesign from "./pages/Our_services/uiux.jsx";             // /design

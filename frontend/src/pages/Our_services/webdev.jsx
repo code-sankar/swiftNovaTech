@@ -571,7 +571,7 @@ const WebDevelopment = () => {
           <div className="mt-9 flex flex-wrap gap-3">
             <button
               onClick={() => navigate("/contact")}
-              className="group inline-flex items-center gap-2 border border-paper bg-paper px-5 py-3.5 font-mono text-[0.82rem] font-medium text-ink transition hover:border-accent hover:bg-accent hover:text-white"
+              className="group sn-fill-invert inline-flex items-center gap-2 border border-paper bg-paper px-5 py-3.5 font-mono text-[0.82rem] font-medium text-ink"
             >
               Book a free consultation
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
