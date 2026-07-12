@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <header className="font-body">
       {/* Top bar */}
-      <div className="border-b border-line bg-paper">
+      {/* <div className="border-b border-line bg-paper">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
           <div className="flex h-9 items-center justify-between gap-4 font-mono text-[0.72rem] text-faint">
             <div className="flex gap-6 flex-wrap">
@@ -57,7 +57,7 @@ const Navbar = () => {
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main nav */}
       <nav className="sticky top-0 z-50 border-b border-line bg-paper/85 backdrop-blur">

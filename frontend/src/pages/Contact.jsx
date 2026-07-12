@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Cal, { getCalApi } from "@calcom/embed-react";
 import {
   Mail,
   Phone,
@@ -13,21 +14,15 @@ import {
   Zap,
   Award,
   Star,
+  Calendar,
 } from "lucide-react";
 
 /* ─── data ───────────────────────────────────────────────────── */
 
 /*
-  Contact.jsx — DATA BLOCK ONLY  (SwiftNova / swiftnova.dev)
+  Contact.jsx — SwiftNova / swiftnova.dev
 
-  Replace your existing const declarations (from `const contactInfo` down to
-  `const timelineOptions`) with everything below. Do NOT touch the component,
-  handleSubmit, validation, or Web3Forms logic — none of that changes.
-
-  Reuses the MessageCircle icon you already import (old "live chat" card),
-  now repurposed as WhatsApp — so no import changes needed.
-
-  NOTE: emails assume swiftnova.dev. If you registered a different TLD,
+  NOTE: emails assume swiftnovatechlabs.com. If you registered a different TLD,
   substitute it here and everywhere else.
 */
 
@@ -73,7 +68,7 @@ const promises = [
 const quickStats = [
   { value: "24h", label: "response time" },
   { value: "30+", label: "websites shipped" },
-  { value: "6",   label: "countries served" },
+  { value: "6", label: "countries served" },
   { value: "95%", label: "client satisfaction" },
 ];
 
@@ -108,9 +103,39 @@ const Contact = () => {
     budget: "",
     timeline: "",
     message: "",
+    botcheck: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // "success" | "error" | null
+  const [errorMessage, setErrorMessage] = useState("");
+
+  /* ─── Cal.com inline embed ─────────────────────────────────── */
+  const CAL_NAMESPACE = "intro-call";
+  // TODO: replace with your real Cal username + event slug (see dashboard setup)
+  const CAL_LINK = "swiftnova/intro-call";
+
+  useEffect(() => {
+    (async () => {
+      const cal = await getCalApi({ namespace: CAL_NAMESPACE });
+      cal("ui", {
+        theme: "light",
+        layout: "month_view",
+        hideEventTypeDetails: false,
+        // brandColor is the reliable big lever — set it to your text-accent hex.
+        styles: { branding: { brandColor: "#1a1a1a" } }, // TODO: accent hex
+        // Optional finer theming. Keys are Cal CSS vars (no leading --).
+        // Full list: https://cal.com/docs/core-features/embed/embed-theming
+        cssVarsPerTheme: {
+          light: {
+            "cal-brand": "#1a1a1a", // TODO: accent hex
+            "cal-brand-emphasis": "#000000",
+            "cal-brand-text": "#ffffff",
+          },
+          dark: {},
+        },
+      });
+    })();
+  }, []);
 
   const handleChange = (e) =>
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -142,8 +167,8 @@ const Contact = () => {
         },
         body: JSON.stringify({
           access_key: import.meta.env.VITE_WEB3FORMS_KEY,
-          subject: `New enquiry from ${formData.name} — SanRaf`,
-          from_name: "SanRaf Contact Form",
+          subject: `New enquiry from ${formData.name} — SwiftNova Tech Labs`,
+          from_name: "SwiftNova Tech Labs Contact Form",
           name: formData.name,
           email: formData.email,
           company: formData.company || "—",
@@ -356,7 +381,7 @@ const Contact = () => {
                       </p>
                       <p className="font-mono text-[0.72rem] text-red-700">
                         Please try again or email us directly at
-                        support@sanraf.dev
+                        info@swiftnovatechlabs.com
                       </p>
                     </div>
                   </motion.div>
@@ -367,17 +392,14 @@ const Contact = () => {
                 <input
                   type="checkbox"
                   name="botcheck"
-                  checked={formData.botcheck}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      botcheck: e.target.checked,
-                    }))
-                  }
+                  className="hidden"
                   style={{ display: "none" }}
                   tabIndex={-1}
                   autoComplete="off"
-                  aria-hidden="true"
+                  checked={formData.botcheck}
+                  onChange={(e) =>
+                    setFormData((p) => ({ ...p, botcheck: e.target.checked }))
+                  }
                 />
                 {/* row 1 */}
                 <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
@@ -524,6 +546,44 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* ══════════ BOOK A CALL ══════════ */}
+      <section className="border-b border-line">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
+          <div className="mb-10 max-w-[52ch]">
+            <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
+              <span className="inline-block h-px w-3.5 bg-accent" />
+              book a call
+            </span>
+            <h2 className="mt-6 font-display text-[clamp(1.8rem,1.2rem+2.4vw,2.75rem)] font-medium leading-[1.08] tracking-tight text-ink">
+              Prefer to talk it through?
+            </h2>
+            <p className="mt-4 text-[1.02rem] leading-[1.55] text-graphite">
+              Pick a slot that suits you — shown in your own timezone — and
+              you'll get a calendar invite the moment you book. A 30-minute
+              intro call, no obligation.
+            </p>
+          </div>
+
+          <div className="border border-line bg-white">
+            <div className="flex justify-between border-b border-line px-4 py-3 font-mono text-[0.72rem] text-faint">
+              <span>~/book-a-call</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Calendar className="h-3 w-3 text-accent" strokeWidth={1.6} />
+                30 min · your timezone
+              </span>
+            </div>
+            <div className="min-h-[640px] p-2 sm:p-4">
+              <Cal
+                namespace={CAL_NAMESPACE}
+                calLink={CAL_LINK}
+                style={{ width: "100%", height: "100%", overflow: "scroll" }}
+                config={{ layout: "month_view" }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ══════════ OFFICE / MAP PLACEHOLDER ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-14 md:py-16">
@@ -532,12 +592,14 @@ const Contact = () => {
               {
                 icon: Clock,
                 label: "business hours",
-                lines: ["Mon–Fri: 9:00–19:00 IST", "Sat–Sun: Closed"],
+                lines: ["Mon–Fri: 9:00–18:00 IST", "Sat–Sun: Closed"],
               },
               {
                 icon: MapPin,
                 label: "office address",
-                lines: ["Madhurawada Area Visakhapatnam, Andhra Pradesh, India"],
+                lines: [
+                  "Madhurawada Area Visakhapatnam, Andhra Pradesh, India",
+                ],
               },
               {
                 icon: Mail,
