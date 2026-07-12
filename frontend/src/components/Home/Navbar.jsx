@@ -14,6 +14,7 @@ const nav = [
       { name: "CMS & Headless Websites", href: "/cms" },
       { name: "Website Design (UI/UX)", href: "/design" },
       { name: "Maintenance & SEO", href: "/maintenance" },
+      { name: "Mobile App Development", href: "/mobile" },
     ],
   },
   {

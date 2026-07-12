@@ -11,6 +11,7 @@ import WebApps from "./pages/Our_services/wenApps.jsx";            // /web-apps 
 import CMS from "./pages/Our_services/cms.jsx";                     // /cms
 import UIUXDesign from "./pages/Our_services/uiux.jsx";             // /design
 import Maintenance from "./pages/Our_services/Maintenence.jsx";     // /maintenance (TODO: rename file -> Maintenance.jsx)
+import MobileDevelopment from "./pages/Our_services/mobiledev.jsx";
 
 // TODO(ecommerce): /ecommerce currently renders the CMS page because Ecommerce
 // imports cms.jsx. Create pages/Our_services/ecommerce.jsx, then change the
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
       { path: "/cms",         element: <CMS /> },
       { path: "/design",      element: <UIUXDesign /> },
       { path: "/maintenance", element: <Maintenance /> },
-
+      { path: "/mobile",      element: <MobileDevelopment /> },
       // Core
       { path: "/blog",    element: <Blogs /> },
       { path: "/contact", element: <Contact /> },

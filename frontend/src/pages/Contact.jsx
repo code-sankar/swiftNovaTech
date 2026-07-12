@@ -15,6 +15,8 @@ import {
   Award,
   Star,
   Calendar,
+  Video,
+  Globe,
 } from "lucide-react";
 
 /* ─── data ───────────────────────────────────────────────────── */
@@ -67,9 +69,21 @@ const promises = [
 // "6 countries" leans into the foreign-client focus.
 const quickStats = [
   { value: "24h", label: "response time" },
-  { value: "30+", label: "websites shipped" },
+  { value: "15+", label: "websites shipped" },
   { value: "6", label: "countries served" },
   { value: "95%", label: "client satisfaction" },
+];
+
+// Presentational only — the "at a glance" rail beside the calendar.
+const bookingMeta = [
+  { icon: Clock, label: "duration", value: "30 minutes" },
+  { icon: Video, label: "platform", value: "Google Meet — link on booking" },
+  { icon: Globe, label: "timezone", value: "Auto-detected · your local time" },
+  {
+    icon: CheckCircle,
+    label: "commitment",
+    value: "None — a talk, not a pitch",
+  },
 ];
 
 // Budgets already in USD — correct for overseas clients. Left unchanged.
@@ -111,7 +125,6 @@ const Contact = () => {
 
   /* ─── Cal.com inline embed ─────────────────────────────────── */
   const CAL_NAMESPACE = "intro-call";
-  // TODO: replace with your real Cal username + event slug (see dashboard setup)
   const CAL_LINK = "swiftnova/intro-call";
 
   useEffect(() => {
@@ -122,13 +135,13 @@ const Contact = () => {
         layout: "month_view",
         hideEventTypeDetails: false,
         // brandColor is the reliable big lever — set it to your text-accent hex.
-        styles: { branding: { brandColor: "#1a1a1a" } }, // TODO: accent hex
+        styles: { branding: { brandColor: "#2340F0" } },
         // Optional finer theming. Keys are Cal CSS vars (no leading --).
         // Full list: https://cal.com/docs/core-features/embed/embed-theming
         cssVarsPerTheme: {
           light: {
-            "cal-brand": "#1a1a1a", // TODO: accent hex
-            "cal-brand-emphasis": "#000000",
+            "cal-brand": "#2340F0",
+            "cal-brand-emphasis": "#182FC4",
             "cal-brand-text": "#ffffff",
           },
           dark: {},
@@ -222,48 +235,46 @@ const Contact = () => {
       {/* ══════════ HERO ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1.35fr_0.95fr] lg:items-end">
-            <div>
-              <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
-                <span className="inline-block h-px w-3.5 bg-accent" />
-                get in touch
-              </span>
-              <h1 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,1.3rem+3.8vw,4rem)] font-medium leading-[1.05] tracking-tight text-ink">
-                Tell us what you're{" "}
-                <span className="border-b-2 border-accent pb-0.5">
-                  building
-                </span>
-                .
-              </h1>
-              <p className="mt-6 max-w-[52ch] text-[clamp(1.02rem,1rem+0.4vw,1.2rem)] leading-[1.55] text-graphite">
-                Whether you have a detailed brief or just an idea, the best next
-                step is a conversation. Fill out the form and we'll come back
-                within 24 hours with a clear response — not a sales pitch.
-              </p>
-            </div>
+          <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
+            <span className="inline-block h-px w-3.5 bg-accent" />
+            get in touch
+          </span>
 
-            {/* quick stats panel */}
-            <aside className="border border-line bg-white">
-              <div className="flex justify-between border-b border-line px-4 py-3 font-mono text-[0.72rem] text-faint">
-                <span>~/studio</span>
-                <span>at a glance</span>
-              </div>
-              <div className="grid grid-cols-2">
-                {quickStats.map((s, i) => (
-                  <div
-                    key={s.label}
-                    className={`p-5 ${i % 2 === 0 ? "border-r border-line" : ""} ${i < 2 ? "border-b border-line" : ""}`}
-                  >
-                    <div className="font-display text-[1.6rem] font-medium tracking-tight text-ink">
-                      {s.value}
-                    </div>
-                    <div className="mt-1 font-mono text-[0.68rem] text-graphite">
-                      {s.label}
-                    </div>
+          <div className="mt-7 grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-end">
+            <h1 className="max-w-[16ch] font-display text-[clamp(2.5rem,1.4rem+4.2vw,4.4rem)] font-medium leading-[1.02] tracking-tight text-ink">
+              Tell us what you're{" "}
+              <span className="border-b-2 border-accent pb-0.5">building</span>.
+            </h1>
+            <p className="max-w-[46ch] text-[clamp(1.02rem,1rem+0.4vw,1.18rem)] leading-[1.55] text-graphite lg:pb-2">
+              A detailed brief or a rough idea — either way, the best next step
+              is a conversation. Send the form or book a call below, and we'll
+              reply within 24 hours. No sales pitch.
+            </p>
+          </div>
+
+          {/* stats ledger */}
+          <div className="mt-12 md:mt-16 border border-line bg-white">
+            <div className="grid grid-cols-2 md:grid-cols-4">
+              {quickStats.map((s, i) => (
+                <div
+                  key={s.label}
+                  className={[
+                    "hov-stat group p-6 md:p-7",
+                    i % 2 === 0 ? "border-r border-line" : "",
+                    i < 2 ? "border-b border-line" : "",
+                    "md:border-b-0",
+                    i % 4 !== 3 ? "md:border-r md:border-line" : "md:border-r-0",
+                  ].join(" ")}
+                >
+                  <div className="font-display text-[clamp(1.9rem,1.4rem+1.5vw,2.7rem)] font-medium tracking-tight text-ink">
+                    {s.value}
                   </div>
-                ))}
-              </div>
-            </aside>
+                  <div className="mt-2 font-mono text-[0.68rem] text-graphite">
+                    {s.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -283,10 +294,10 @@ const Contact = () => {
                 return (
                   <div
                     key={c.label}
-                    className={`flex gap-4 px-5 py-5 ${i < contactInfo.length - 1 ? "border-b border-line" : ""}`}
+                    className={`hov-cell-left group flex gap-4 px-5 py-5 ${i < contactInfo.length - 1 ? "border-b border-line" : ""}`}
                   >
                     <Icon
-                      className="mt-0.5 h-4 w-4 flex-none text-accent"
+                      className="mt-0.5 h-4 w-4 flex-none text-accent hov-icon"
                       strokeWidth={1.6}
                     />
                     <div>
@@ -315,10 +326,10 @@ const Contact = () => {
                 return (
                   <div
                     key={p.text}
-                    className={`flex items-center gap-3 px-5 py-4 ${i < promises.length - 1 ? "border-b border-line" : ""}`}
+                    className={`hov-cell-left group flex items-center gap-3 px-5 py-4 ${i < promises.length - 1 ? "border-b border-line" : ""}`}
                   >
                     <Icon
-                      className="h-4 w-4 flex-none text-accent"
+                      className="h-4 w-4 flex-none text-accent hov-icon"
                       strokeWidth={1.6}
                     />
                     <span className="text-[0.9rem] text-ink">{p.text}</span>
@@ -516,7 +527,7 @@ const Contact = () => {
                     By submitting you agree to our{" "}
                     <a
                       href="/privacy-policy"
-                      className="border-b border-faint transition hover:text-ink"
+                      className="hov-link border-b border-faint hover:text-ink"
                     >
                       privacy policy
                     </a>
@@ -525,7 +536,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group inline-flex shrink-0 items-center gap-2 border border-ink bg-ink px-5 py-3 font-mono text-[0.82rem] font-medium text-paper transition hover:border-accent hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
+                    className="hov-btn group inline-flex shrink-0 items-center gap-2 border border-ink bg-ink px-5 py-3 font-mono text-[0.82rem] font-medium text-paper hover:text-paper disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
@@ -535,7 +546,7 @@ const Contact = () => {
                     ) : (
                       <>
                         Send message
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="hov-arrow h-4 w-4" />
                       </>
                     )}
                   </button>
@@ -549,34 +560,64 @@ const Contact = () => {
       {/* ══════════ BOOK A CALL ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
-          <div className="mb-10 max-w-[52ch]">
-            <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
-              <span className="inline-block h-px w-3.5 bg-accent" />
-              book a call
-            </span>
-            <h2 className="mt-6 font-display text-[clamp(1.8rem,1.2rem+2.4vw,2.75rem)] font-medium leading-[1.08] tracking-tight text-ink">
-              Prefer to talk it through?
-            </h2>
-            <p className="mt-4 text-[1.02rem] leading-[1.55] text-graphite">
-              Pick a slot that suits you — shown in your own timezone — and
-              you'll get a calendar invite the moment you book. A 30-minute
-              intro call, no obligation.
-            </p>
-          </div>
+          <div className="grid border border-line bg-white lg:grid-cols-[minmax(0,380px)_1fr]">
+            {/* ── context panel ── */}
+            <div className="border-b border-line lg:border-b-0 lg:border-r">
+              <div className="flex items-center justify-between border-b border-line px-6 py-3 font-mono text-[0.72rem] text-faint">
+                <span>~/book-a-call</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Calendar className="h-3 w-3 text-accent" strokeWidth={1.6} />
+                  live
+                </span>
+              </div>
 
-          <div className="border border-line bg-white">
-            <div className="flex justify-between border-b border-line px-4 py-3 font-mono text-[0.72rem] text-faint">
-              <span>~/book-a-call</span>
-              <span className="inline-flex items-center gap-1.5">
-                <Calendar className="h-3 w-3 text-accent" strokeWidth={1.6} />
-                30 min · your timezone
-              </span>
+              <div className="p-6 md:p-8">
+                <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
+                  <span className="inline-block h-px w-3.5 bg-accent" />
+                  book a call
+                </span>
+                <h2 className="mt-5 font-display text-[clamp(1.7rem,1.2rem+2vw,2.4rem)] font-medium leading-[1.1] tracking-tight text-ink">
+                  Prefer to talk it through?
+                </h2>
+                <p className="mt-4 text-[0.98rem] leading-[1.55] text-graphite">
+                  Pick a time that suits you — the calendar shows every slot in
+                  your own timezone and sends a calendar invite the moment you
+                  book.
+                </p>
+
+                <div className="mt-8 border-t border-line">
+                  {bookingMeta.map((m, i) => {
+                    const Icon = m.icon;
+                    return (
+                      <div
+                        key={m.label}
+                        className={`group flex gap-3.5 py-4 ${i < bookingMeta.length - 1 ? "border-b border-line" : ""}`}
+                      >
+                        <Icon
+                          className="mt-0.5 h-4 w-4 flex-none text-accent hov-icon"
+                          strokeWidth={1.6}
+                        />
+                        <div>
+                          <p className="font-mono text-[0.66rem] text-faint">
+                            {m.label}
+                          </p>
+                          <p className="mt-0.5 text-[0.9rem] text-ink">
+                            {m.value}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-            <div className="min-h-[640px] p-2 sm:p-4">
+
+            {/* ── calendar (auto-sizes to content — no fixed height, no scroll) ── */}
+            <div className="min-h-[560px] p-2 sm:p-3">
               <Cal
                 namespace={CAL_NAMESPACE}
                 calLink={CAL_LINK}
-                style={{ width: "100%", height: "100%", overflow: "scroll" }}
+                style={{ width: "100%" }}
                 config={{ layout: "month_view" }}
               />
             </div>
@@ -607,9 +648,15 @@ const Contact = () => {
                 lines: ["info@swiftnovatechlabs.com"],
               },
             ].map(({ icon: Icon, label, lines }) => (
-              <div key={label} className="border border-line bg-white p-6">
+              <div
+                key={label}
+                className="hov-cell group border border-line bg-white p-6"
+              >
                 <div className="flex items-center gap-2 font-mono text-[0.72rem] text-faint">
-                  <Icon className="h-3.5 w-3.5 text-accent" strokeWidth={1.6} />
+                  <Icon
+                    className="h-3.5 w-3.5 text-accent hov-icon"
+                    strokeWidth={1.6}
+                  />
                   {label}
                 </div>
                 <div className="mt-3 space-y-1">

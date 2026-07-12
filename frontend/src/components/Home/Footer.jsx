@@ -8,6 +8,7 @@ const services = [
   ["CMS & Headless", "/cms"],
   ["Website Design", "/design"],
   ["Maintenance & SEO", "/maintenance"],
+  ["Mobile App Development", "/mobile"],
 ];
 
 const links = [
