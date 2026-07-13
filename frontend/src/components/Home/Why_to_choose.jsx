@@ -25,10 +25,10 @@ const features = [
 ];
 
 const stats = [
-  { value: "2+", label: "years building the web" },
-  { value: "30+", label: "websites shipped" },
+  { value: "5+", label: "years building the web" },
+  { value: "15+", label: "websites shipped" },
   { value: "95%", label: "client satisfaction" },
-  { value: "25+", label: "global clients" },
+  { value: "10+", label: "global clients" },
 ];
 
 const WhyChooseUs = () => {

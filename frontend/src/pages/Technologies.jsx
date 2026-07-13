@@ -9,6 +9,7 @@ import {
   Gauge,
   ArrowRight,
   CheckCircle,
+  Smartphone,
 } from "lucide-react";
  
 /* ─── data ───────────────────────────────────────────────────── */
@@ -32,6 +33,7 @@ const techStack = [
       { name: "React",        level: "Expert",       projects: 30 },
       { name: "Next.js",      level: "Expert",       projects: 22 },
       { name: "Vue.js",       level: "Advanced",     projects: 12 },
+      { name: "Angular",       level: "Advanced",     projects: 12 },
       { name: "TypeScript",   level: "Expert",       projects: 26 },
       { name: "Tailwind CSS", level: "Expert",       projects: 28 },
       { name: "Astro",        level: "Advanced",     projects: 9  },
@@ -47,6 +49,9 @@ const techStack = [
       { name: "Node.js", level: "Expert",       projects: 27 },
       { name: "Express", level: "Expert",       projects: 24 },
       { name: "Python",  level: "Advanced",     projects: 14 },
+      { name: "Django",  level: "Advanced",     projects: 14 },
+      { name: "Java",  level: "Expert",     projects: 14 },
+      { name: "Spring Boot",  level: "Expert",     projects: 14 },
       { name: "FastAPI", level: "Advanced",     projects: 9  },
       { name: "GraphQL", level: "Advanced",     projects: 11 },
       { name: "REST",    level: "Expert",       projects: 30 },
@@ -79,6 +84,7 @@ const techStack = [
       { name: "Supabase",   level: "Advanced", projects: 9  },
       { name: "Vercel",     level: "Expert",   projects: 24 },
       { name: "Netlify",    level: "Advanced", projects: 12 },
+      { name: "Render",    level: "Advanced", projects: 12 },
       { name: "Cloudflare", level: "Advanced", projects: 15 },
     ],
   },
@@ -95,6 +101,20 @@ const techStack = [
       { name: "Search Console",   level: "Advanced",     projects: 20 },
       { name: "Schema / SEO",     level: "Advanced",     projects: 18 },
       { name: "GTM",              level: "Intermediate", projects: 10 },
+    ],
+  },
+  {
+    category: "Android & Mobile Apps",
+    icon: Smartphone,
+    description:
+      "Native and cross-platform mobile applications that deliver a seamless user experience on both Android and iOS.",
+    features: ["Native Android/iOS", "Cross-Platform", "Push Notifications", "Offline Support"],
+    technologies: [
+      { name: "Android Studio", level: "Expert",       projects: 10 },
+      { name: "Java",           level: "Expert",       projects: 8 },
+      { name: "Kotlin",         level: "Advanced",     projects: 6 },
+      { name: "Flutter",        level: "Advanced",     projects: 5 },
+      { name: "React Native",   level: "Intermediate", projects: 3 },
     ],
   },
 ];
@@ -274,9 +294,9 @@ const Technologies = () => {
                           >
                             {tech.level.toLowerCase()}
                           </span>
-                          <span className="font-mono text-[0.68rem] text-faint">
+                          {/* <span className="font-mono text-[0.68rem] text-faint">
                             {tech.projects}+ projects
-                          </span>
+                          </span> */}
                         </div>
 
                         {/* proficiency bar */}

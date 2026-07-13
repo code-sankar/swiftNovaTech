@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion, animate } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
   ShieldCheck,
@@ -13,10 +14,10 @@ import {
 /* ─── data ───────────────────────────────────────────────────── */
 
 const stats = [
-  { value: "30+", label: "websites shipped" },
+  { value: "15+", label: "websites shipped" },
   { value: "95%", label: "client satisfaction" },
-  { value: "25+", label: "global clients" },
-  { value: "2+",  label: "years building the web" },
+  { value: "10+", label: "global clients" },
+  { value: "5+",  label: "years building the web" },
 ];
 
 const features = [
@@ -63,6 +64,40 @@ const reasons = [
   "Senior developers on every project, not just for kickoff.",
   "25+ companies trust us with their online presence.",
 ];
+
+/* ─── count-up stat ──────────────────────────────────────────── */
+
+const StatValue = ({ value }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-15% 0px" });
+  const reduce = useReducedMotion();
+
+  const match = String(value).match(/^([\d.]+)(.*)$/);
+  const target = match ? parseFloat(match[1]) : 0;
+  const suffix = match ? match[2] : "";
+  const decimals = match && match[1].includes(".") ? 1 : 0;
+
+  const [display, setDisplay] = useState(reduce ? target : 0);
+
+  useEffect(() => {
+    if (!match || !inView || reduce) return;
+    const controls = animate(0, target, {
+      duration: 1.1,
+      ease: "easeOut",
+      onUpdate: (v) => setDisplay(v),
+    });
+    return controls.stop;
+  }, [inView, reduce, target]);
+
+  if (!match) return <span>{value}</span>;
+
+  return (
+    <span ref={ref}>
+      {display.toFixed(decimals)}
+      {suffix}
+    </span>
+  );
+};
 
 /* ─── component ──────────────────────────────────────────────── */
 
@@ -157,8 +192,8 @@ const WhyUs = () => {
                   ${i > 0 ? "md:border-l md:border-line" : ""}
                 `}
               >
-                <div className="font-display text-[clamp(1.75rem,1.2rem+1.5vw,2.4rem)] font-medium tracking-tight text-ink">
-                  {s.value}
+                <div className="font-display text-[clamp(1.75rem,1.2rem+1.5vw,2.4rem)] font-medium tabular-nums tracking-tight text-ink">
+                  <StatValue value={s.value} />
                 </div>
                 <div className="mt-1 font-mono text-[0.72rem] text-graphite">
                   {s.label}
@@ -198,13 +233,22 @@ const WhyUs = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.07 }}
-                  className="flex flex-col border-b border-r border-line bg-white p-7"
+                  className="group relative flex flex-col border-b border-r border-line bg-white p-7"
                 >
+                  {/* accent top-rule on hover */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-0 top-0 h-0.5 w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"
+                  />
+
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[0.72rem] text-faint">
+                    <span className="font-mono text-[0.72rem] text-faint transition-colors group-hover:text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <Icon className="h-5 w-5 text-ink" strokeWidth={1.6} />
+                    <Icon
+                      className="h-5 w-5 text-ink transition-colors group-hover:text-accent"
+                      strokeWidth={1.6}
+                    />
                   </div>
 
                   <h3 className="mt-6 font-display text-[1.2rem] font-medium text-ink">
@@ -235,7 +279,7 @@ const WhyUs = () => {
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20 lg:items-start">
-            <div>
+            <div className="lg:sticky lg:top-28 lg:self-start">
               <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
                 <span className="inline-block h-px w-3.5 bg-accent" />
                 the honest version

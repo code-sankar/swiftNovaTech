@@ -4,65 +4,65 @@ import { Github, Linkedin, Twitter, Mail, X } from "lucide-react";
 
 const team = [
   {
-    name: "Sankar", // TODO: full name
+    name: "Sankar Jyoti Chetia", 
     title: "Founder & Full-Stack Developer",
     specialty: "React, Node.js, end-to-end web builds",
-    experience: "TODO yrs", // TODO
-    bio: "Leads projects from first wireframe to launch, and is the main point of contact for clients.", // TODO: personalise
+    experience: "5+ yrs",
+    bio: "Leads projects from first wireframe to launch, and is the main point of contact for clients.", 
     skills: ["React", "Next.js", "Node.js", "PostgreSQL", "Tailwind"],
-    achievements: ["30+ websites shipped"], // TODO: verify
+    achievements: ["10+ websites shipped"], 
     social: {
-      github: "#",   // TODO
-      linkedin: "#", // TODO
+      github: "https://github.com/code-sankar",   
+      linkedin: "https://www.linkedin.com/in/sankarjyoti-chetia-14b885208/", 
       twitter: "#",  // TODO
-      email: "mailto:sankar@swiftnova.dev", // TODO: real mailbox on new domain
+      email: "sankarjyoti1111@gmail.com",
     },
   },
   {
-    name: "Rafel", // TODO: full name
-    title: "Co-Founder & Backend Developer",
-    specialty: "APIs, databases, integrations",
-    experience: "TODO yrs", // TODO
-    bio: "Owns the server side — APIs, data, and the integrations that keep client sites running.", // TODO: personalise
+    name: "Pawan Kumar", 
+    title: "Co-Founder & Mobile Application Developer",
+    specialty: "Android Studio, Java, Kotlin, Flutter",
+    experience: "5+ yrs", 
+    bio: "Builds Mobile Application from scratch to launch according to client requirements", 
     skills: ["Node.js", "Express", "PostgreSQL", "REST APIs", "Docker"],
-    achievements: ["TODO"], // TODO
+    achievements: ["3+ websites shipped"], 
     social: {
       github: "#",   // TODO
       linkedin: "#", // TODO
       twitter: "#",  // TODO
-      email: "mailto:rafel@swiftnova.dev", // TODO: real mailbox
+      email: "mailto:rafel@swiftnova.dev", 
     },
   },
   // ─── Optional placeholder rows — fill in real teammates or DELETE ───
   {
-    name: "TODO: Frontend dev",
-    title: "Frontend Developer",
-    specialty: "UI engineering, performance",
-    experience: "TODO yrs",
-    bio: "TODO",
-    skills: ["React", "TypeScript", "Tailwind", "Framer Motion"],
-    achievements: ["TODO"],
+    name: "Peter Pawan",
+    title: "Backend Developer",
+    specialty: "Java, Spring, Node.js, Express, PostgreSQL, Spring Boot",
+    experience: "5+ yrs",
+    bio: "Develops robust backend solutions and maintains database integrity.",
+    skills: ["Java", "Spring", "Node.js", "Express", "PostgreSQL", "Spring Boot"],
+    achievements: ["4+ backend projects completed"],
     social: { github: "#", linkedin: "#", twitter: "#", email: "#" }, // TODO
   },
   {
-    name: "TODO: Designer",
+    name: "Rafel",
     title: "Web & UI/UX Designer",
     specialty: "Interface design, design systems",
-    experience: "TODO yrs",
-    bio: "TODO",
+    experience: "4+ yrs",
+    bio: "Crafts intuitive and visually appealing user interfaces, ensuring a seamless user experience.",
     skills: ["Figma", "UI Design", "Prototyping", "Design Systems", "Accessibility"],
-    achievements: ["TODO"],
+    achievements: ["5+ design projects completed"],
     social: { github: "#", linkedin: "#", twitter: "#", email: "#" }, // TODO
   },
   {
-    name: "TODO: SEO/support",
-    title: "SEO & Maintenance Specialist",
-    specialty: "Technical SEO, performance, ongoing support",
-    experience: "TODO yrs",
-    bio: "TODO",
-    skills: ["Technical SEO", "Core Web Vitals", "Analytics", "Content"],
-    achievements: ["TODO"],
-    social: { github: "#", linkedin: "#", twitter: "#", email: "#" }, // TODO
+    name: "Devi ",
+    title: "Customer Support",
+    specialty: "Customer support, client relations",
+    experience: "3+ yrs",
+    bio: "Provides exceptional customer support and maintains strong client relationships.",
+    skills: ["Customer Support", "Client Relations", "Communication", "Problem Solving", "CRM Tools"],
+    achievements: ["15+ satisfied clients"],
+    social: { github: "#", linkedin: "#", twitter: "#", email: "#" }, 
   },
 ];
 
@@ -70,7 +70,7 @@ const filters = [
   { id: "all",       label: "All team" },
   { id: "developer", label: "Developers" },
   { id: "design",    label: "Design" },
-  { id: "seo",       label: "SEO & Support" },
+  { id: "support",       label: "Customer Support" },
 ];
 
 const initials = (name) =>

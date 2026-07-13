@@ -130,7 +130,7 @@ const Practice_areas = () => {
                 </div>
 
                 <div className="mt-6 flex items-center justify-between border-t border-line pt-4 font-mono text-[0.72rem] text-faint">
-                  <span>{area.projects}+ projects</span>
+                  {/* <span>{area.projects}+ projects</span> */}
                   <ArrowUpRight className="h-4 w-4 text-ink transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </motion.button>

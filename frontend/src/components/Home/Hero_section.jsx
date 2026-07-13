@@ -8,6 +8,7 @@ const capabilities = [
   { n: "03", t: "Web Apps & SaaS", d: "Full-stack" },
   { n: "04", t: "CMS / Headless", d: "WordPress · Sanity" },
   { n: "05", t: "Website Design", d: "Figma · UI/UX" },
+  { n: "06", t: "Mobile Apps", d: "Java · Kotlin" },
 ];
 
 const fadeUp = {

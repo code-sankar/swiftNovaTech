@@ -1,13 +1,20 @@
 import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, ExternalLink, Filter } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ExternalLink,
+  Filter,
+  LayoutGrid,
+  List as ListIcon,
+} from "lucide-react";
 import { projects, projectCategories, getFeatured } from "../../data/projects";
 
 /* ─── data ────────────────────────────────────────────────── */
 
 const stats = [
-  { value: "30+", label: "websites shipped" },
+  { value: "15+", label: "websites shipped" },
   { value: "10+", label: "industries served" },
   { value: "6",   label: "countries reached" },
   { value: "95%", label: "client satisfaction" },
@@ -19,15 +26,41 @@ const featured = getFeatured();
 
 const ClientProjects = () => {
   const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState("All");
+  const reduce = useReducedMotion();
 
-  const filtered = useMemo(
-    () =>
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [sort, setSort] = useState("recent"); // "recent" | "oldest"
+  const [view, setView] = useState("grid");   // "grid" | "list"
+
+  // project count per category (for filter footnotes)
+  const counts = useMemo(() => {
+    const map = { All: projects.length };
+    projects.forEach((p) => {
+      map[p.category] = (map[p.category] || 0) + 1;
+    });
+    return map;
+  }, []);
+
+  // filter + sort
+  const visible = useMemo(() => {
+    const base =
       activeFilter === "All"
         ? projects
-        : projects.filter((p) => p.category === activeFilter),
-    [activeFilter],
-  );
+        : projects.filter((p) => p.category === activeFilter);
+
+    return [...base].sort((a, b) => {
+      const ay = parseInt(a.year, 10) || 0;
+      const by = parseInt(b.year, 10) || 0;
+      return sort === "recent" ? by - ay : ay - by;
+    });
+  }, [activeFilter, sort]);
+
+  const seg = (isActive) =>
+    `px-3 py-1.5 font-mono text-[0.72rem] transition-colors ${
+      isActive
+        ? "bg-ink text-paper"
+        : "text-graphite hover:text-ink"
+    }`;
 
   return (
     <div className="min-h-screen bg-paper font-body">
@@ -153,10 +186,11 @@ const ClientProjects = () => {
         </div>
       </section>
 
-      {/* ══════════ FILTER + GRID ══════════ */}
+      {/* ══════════ FILTER + GRID/LIST ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+          {/* heading + result count */}
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
             <div>
               <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
                 <span className="inline-block h-px w-3.5 bg-accent" />
@@ -166,8 +200,15 @@ const ClientProjects = () => {
                 Browse the full portfolio.
               </h2>
             </div>
+            <p className="font-mono text-[0.72rem] text-faint">
+              showing <span className="text-ink">{visible.length}</span> of{" "}
+              {projects.length}
+            </p>
+          </div>
 
-            {/* filter */}
+          {/* control strip */}
+          <div className="mb-8 flex flex-col gap-4 border-y border-line py-4 lg:flex-row lg:items-center lg:justify-between">
+            {/* filters */}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
               <span className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-faint">
                 <Filter className="h-3.5 w-3.5" />
@@ -184,88 +225,202 @@ const ClientProjects = () => {
                   }`}
                 >
                   {c}
+                  <sup className="ml-0.5 font-mono text-[0.58rem] text-faint">
+                    {counts[c] ?? 0}
+                  </sup>
                   {activeFilter === c && (
                     <span className="absolute -bottom-px left-0 h-[1.5px] w-full bg-accent" />
                   )}
                 </button>
               ))}
             </div>
+
+            {/* sort + view */}
+            <div className="flex items-center gap-5">
+              <div className="flex items-center gap-2.5">
+                <span className="font-mono text-[0.72rem] text-faint">sort</span>
+                <div className="flex items-center border border-line">
+                  <button onClick={() => setSort("recent")} className={seg(sort === "recent")}>
+                    newest
+                  </button>
+                  <button
+                    onClick={() => setSort("oldest")}
+                    className={`border-l border-line ${seg(sort === "oldest")}`}
+                  >
+                    oldest
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center border border-line" role="group" aria-label="View mode">
+                <button
+                  onClick={() => setView("grid")}
+                  aria-pressed={view === "grid"}
+                  aria-label="Grid view"
+                  className={seg(view === "grid")}
+                >
+                  <LayoutGrid className="h-3.5 w-3.5" strokeWidth={1.7} />
+                </button>
+                <button
+                  onClick={() => setView("list")}
+                  aria-pressed={view === "list"}
+                  aria-label="List view"
+                  className={`border-l border-line ${seg(view === "list")}`}
+                >
+                  <ListIcon className="h-3.5 w-3.5" strokeWidth={1.7} />
+                </button>
+              </div>
+            </div>
           </div>
 
+          {/* results */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeFilter}
-              initial={{ opacity: 0, y: 8 }}
+              key={`${view}-${activeFilter}-${sort}`}
+              initial={reduce ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="grid grid-cols-1 border-l border-t border-line md:grid-cols-2 lg:grid-cols-3"
             >
-              {filtered.map((p) => (
-                <article
-                  key={p.slug}
-                  className="group flex flex-col border-b border-r border-line bg-white p-7"
-                >
-                  <div className="flex items-center justify-between font-mono text-[0.72rem]">
-                    <span className="text-accent">{p.category}</span>
-                    <span className="text-faint">{p.year}</span>
-                  </div>
-
-                  <h3 className="mt-5 font-display text-[1.2rem] font-medium leading-snug text-ink">
-                    <Link to={`/projects/${p.slug}`} className="transition hover:text-accent">
-                      {p.name}
-                    </Link>
-                  </h3>
-                  <p className="mt-1 font-mono text-[0.72rem] text-faint">
-                    {p.nda ? "Confidential client" : p.client}
-                  </p>
-
-                  <p className="mt-4 flex-1 text-[0.9rem] leading-relaxed text-graphite">
-                    {p.summary}
-                  </p>
-
-                  <div className="mt-5 flex flex-wrap gap-1.5">
-                    {p.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="border border-line-strong px-2 py-0.5 font-mono text-[0.66rem] text-graphite"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-5 border-t border-line pt-4 font-mono text-[0.72rem] text-accent">
-                    → {p.outcome}
-                  </div>
-
-                  {/* actions */}
-                  <div className="mt-4 flex items-center justify-between">
-                    <Link
-                      to={`/projects/${p.slug}`}
-                      className="group/vp inline-flex items-center gap-1.5 font-mono text-[0.76rem] text-ink transition hover:text-accent"
+              {view === "grid" ? (
+                /* ── grid view ── */
+                <div className="grid grid-cols-1 border-l border-t border-line md:grid-cols-2 lg:grid-cols-3">
+                  {visible.map((p) => (
+                    <article
+                      key={p.slug}
+                      className="group flex flex-col border-b border-r border-line bg-white p-7"
                     >
-                      View project
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/vp:translate-x-0.5" />
-                    </Link>
-                    {p.liveUrl && !p.nda && (
-                      <a
-                        href={p.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 font-mono text-[0.76rem] text-faint transition hover:text-accent"
-                      >
-                        <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.6} />
-                        Visit site
-                      </a>
-                    )}
+                      <div className="flex items-center justify-between font-mono text-[0.72rem]">
+                        <span className="text-accent">{p.category}</span>
+                        <span className="text-faint">{p.year}</span>
+                      </div>
+
+                      <h3 className="mt-5 font-display text-[1.2rem] font-medium leading-snug text-ink">
+                        <Link to={`/projects/${p.slug}`} className="transition hover:text-accent">
+                          {p.name}
+                        </Link>
+                      </h3>
+                      <p className="mt-1 font-mono text-[0.72rem] text-faint">
+                        {p.nda ? "Confidential client" : p.client}
+                      </p>
+
+                      <p className="mt-4 flex-1 text-[0.9rem] leading-relaxed text-graphite">
+                        {p.summary}
+                      </p>
+
+                      <div className="mt-5 flex flex-wrap gap-1.5">
+                        {p.tags.map((t) => (
+                          <span
+                            key={t}
+                            className="border border-line-strong px-2 py-0.5 font-mono text-[0.66rem] text-graphite"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="mt-5 border-t border-line pt-4 font-mono text-[0.72rem] text-accent">
+                        → {p.outcome}
+                      </div>
+
+                      {/* actions */}
+                      <div className="mt-4 flex items-center justify-between">
+                        <Link
+                          to={`/projects/${p.slug}`}
+                          className="group/vp inline-flex items-center gap-1.5 font-mono text-[0.76rem] text-ink transition hover:text-accent"
+                        >
+                          View project
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/vp:translate-x-0.5" />
+                        </Link>
+                        {p.liveUrl && !p.nda && (
+                          <a
+                            href={p.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 font-mono text-[0.76rem] text-faint transition hover:text-accent"
+                          >
+                            <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.6} />
+                            Visit site
+                          </a>
+                        )}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                /* ── list / ledger view ── */
+                <div className="border border-line bg-white">
+                  {/* column headers (desktop) */}
+                  <div className="hidden grid-cols-[2fr_0.9fr_auto_1.7fr_auto] gap-4 border-b border-line px-5 py-3 font-mono text-[0.66rem] uppercase tracking-wide text-faint md:grid">
+                    <span>project</span>
+                    <span>type</span>
+                    <span>year</span>
+                    <span>outcome</span>
+                    <span className="sr-only">actions</span>
                   </div>
-                </article>
-              ))}
+
+                  {visible.map((p) => (
+                    <div
+                      key={p.slug}
+                      className="grid grid-cols-1 gap-x-4 gap-y-1.5 border-b border-line px-5 py-4 transition-colors last:border-b-0 hover:bg-paper md:grid-cols-[2fr_0.9fr_auto_1.7fr_auto] md:items-center"
+                    >
+                      {/* project + client */}
+                      <div className="min-w-0">
+                        <Link
+                          to={`/projects/${p.slug}`}
+                          className="font-display text-[1rem] font-medium text-ink transition hover:text-accent"
+                        >
+                          {p.name}
+                        </Link>
+                        <div className="truncate font-mono text-[0.7rem] text-faint">
+                          {p.nda ? "Confidential client" : p.client}
+                        </div>
+                      </div>
+
+                      {/* type */}
+                      <div className="font-mono text-[0.72rem] text-accent">
+                        {p.category}
+                      </div>
+
+                      {/* year */}
+                      <div className="font-mono text-[0.72rem] text-faint">
+                        {p.year}
+                      </div>
+
+                      {/* outcome */}
+                      <div className="font-mono text-[0.72rem] text-graphite md:truncate">
+                        → {p.outcome}
+                      </div>
+
+                      {/* actions */}
+                      <div className="mt-1 flex items-center gap-4 md:mt-0 md:justify-end">
+                        <Link
+                          to={`/projects/${p.slug}`}
+                          className="group/vp inline-flex items-center gap-1.5 font-mono text-[0.74rem] text-ink transition hover:text-accent"
+                        >
+                          View
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/vp:translate-x-0.5" />
+                        </Link>
+                        {p.liveUrl && !p.nda && (
+                          <a
+                            href={p.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Visit ${p.name} live site`}
+                            className="text-faint transition hover:text-accent"
+                          >
+                            <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.6} />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
 
-          {filtered.length === 0 && (
+          {visible.length === 0 && (
             <div className="border border-line bg-white px-8 py-16 text-center font-mono text-[0.82rem] text-faint">
               No projects in this category yet.
             </div>
