@@ -11,17 +11,9 @@ import {
   CheckCircle,
   Smartphone,
 } from "lucide-react";
- 
+
 /* ─── data ───────────────────────────────────────────────────── */
- 
-// Aligned to brand-standard numbers (was 200+/50+/5+/99% — inflated & inconsistent).
-const stats = [
-  { value: "30+", label: "websites shipped" },
-  { value: "25+", label: "web technologies" },
-  { value: "2+",  label: "years building for the web" },
-  { value: "95%", label: "client satisfaction" },
-];
- 
+
 const techStack = [
   {
     category: "Frontend",
@@ -33,7 +25,7 @@ const techStack = [
       { name: "React",        level: "Expert",       projects: 30 },
       { name: "Next.js",      level: "Expert",       projects: 22 },
       { name: "Vue.js",       level: "Advanced",     projects: 12 },
-      { name: "Angular",       level: "Advanced",     projects: 12 },
+      { name: "Angular",      level: "Advanced",     projects: 12 },
       { name: "TypeScript",   level: "Expert",       projects: 26 },
       { name: "Tailwind CSS", level: "Expert",       projects: 28 },
       { name: "Astro",        level: "Advanced",     projects: 9  },
@@ -46,15 +38,15 @@ const techStack = [
       "Reliable server-side logic and clean APIs that power the sites and apps we build.",
     features: ["REST APIs", "GraphQL", "Auth", "Integrations"],
     technologies: [
-      { name: "Node.js", level: "Expert",       projects: 27 },
-      { name: "Express", level: "Expert",       projects: 24 },
-      { name: "Python",  level: "Advanced",     projects: 14 },
-      { name: "Django",  level: "Advanced",     projects: 14 },
-      { name: "Java",  level: "Expert",     projects: 14 },
-      { name: "Spring Boot",  level: "Expert",     projects: 14 },
-      { name: "FastAPI", level: "Advanced",     projects: 9  },
-      { name: "GraphQL", level: "Advanced",     projects: 11 },
-      { name: "REST",    level: "Expert",       projects: 30 },
+      { name: "Node.js",     level: "Expert",       projects: 27 },
+      { name: "Express",     level: "Expert",       projects: 24 },
+      { name: "Python",      level: "Advanced",     projects: 14 },
+      { name: "Django",      level: "Advanced",     projects: 14 },
+      { name: "Java",        level: "Expert",       projects: 14 },
+      { name: "Spring Boot", level: "Expert",       projects: 14 },
+      { name: "FastAPI",     level: "Advanced",     projects: 9  },
+      { name: "GraphQL",     level: "Advanced",     projects: 11 },
+      { name: "REST",        level: "Expert",       projects: 30 },
     ],
   },
   {
@@ -84,7 +76,7 @@ const techStack = [
       { name: "Supabase",   level: "Advanced", projects: 9  },
       { name: "Vercel",     level: "Expert",   projects: 24 },
       { name: "Netlify",    level: "Advanced", projects: 12 },
-      { name: "Render",    level: "Advanced", projects: 12 },
+      { name: "Render",     level: "Advanced", projects: 12 },
       { name: "Cloudflare", level: "Advanced", projects: 15 },
     ],
   },
@@ -118,6 +110,17 @@ const techStack = [
     ],
   },
 ];
+
+// Curated architectural anchor core stack for the Hero preview panel
+const featuredCoreStack = [
+  { name: "React", category: "Frontend", count: "30+ Apps" },
+  { name: "Next.js", category: "Frontend", count: "22+ SSR" },
+  { name: "Node.js", category: "Backend", count: "27+ APIs" },
+  { name: "MongoDB", category: "Database", count: "14+ DBs" },
+  { name: "Shopify", category: "E-Commerce", count: "12+ Stores" },
+  { name: "Vercel", category: "DevOps", count: "24+ Ships" },
+];
+
 const levelOrder = { Expert: 0, Advanced: 1, Intermediate: 2 };
 
 /* ─── component ──────────────────────────────────────────────── */
@@ -132,10 +135,12 @@ const Technologies = () => {
   return (
     <div className="min-h-screen bg-paper font-body">
 
-      {/* ══════════ HERO ══════════ */}
+      {/* ══════════ HERO SECTION ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1.35fr_0.95fr] lg:items-end">
+          <div className="grid gap-12 lg:grid-cols-[1.25fr_1.05fr] lg:items-center">
+            
+            {/* Left Content Column */}
             <div>
               <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
                 <span className="inline-block h-px w-3.5 bg-accent" />
@@ -167,21 +172,50 @@ const Technologies = () => {
               </div>
             </div>
 
-            {/* summary panel */}
-            <aside className="border border-line bg-white">
+            {/* Right Column: Redesigned Dynamic Tech Matrix Panel */}
+            <aside className="border border-line bg-white shadow-sm">
               <div className="flex justify-between border-b border-line px-4 py-3 font-mono text-[0.72rem] text-faint">
-                <span>~/stack</span>
-                <span>overview</span>
+                <span>~/production-stack</span>
+                <span>matrix_grid</span>
               </div>
-              <dl className="divide-y divide-line">
-                {stats.map(({ value, label }) => (
-                  <div key={label} className="flex justify-between px-4 py-3">
-                    <dt className="font-mono text-[0.74rem] text-graphite">{label}</dt>
-                    <dd className="font-display text-[1rem] font-medium text-ink">{value}</dd>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 divide-x divide-y divide-line border-b border-line">
+                {featuredCoreStack.map((tech, idx) => (
+                  <div 
+                    key={tech.name} 
+                    className={`group flex flex-col justify-between p-4 bg-white hover:bg-accent/[0.02] transition-colors duration-200
+                      ${idx < 3 ? 'pt-4' : 'border-t border-line'} 
+                      ${idx % 3 === 0 ? '' : 'border-l border-line'}
+                    `}
+                  >
+                    <div>
+                      <span className="block font-mono text-[0.62rem] text-faint uppercase tracking-wider mb-1">
+                        {tech.category}
+                      </span>
+                      <span className="font-display text-[1.1rem] font-medium text-ink group-hover:text-accent transition-colors">
+                        {tech.name}
+                      </span>
+                    </div>
+                    <div className="mt-6 flex items-center justify-between">
+                      <span className="font-mono text-[0.68rem] px-2 py-0.5 bg-paper rounded border border-line text-graphite group-hover:border-accent/30 group-hover:text-accent transition-all">
+                        {tech.count}
+                      </span>
+                      <ArrowRight className="h-3 w-3 text-faint opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-accent transition-all duration-200" />
+                    </div>
                   </div>
                 ))}
-              </dl>
+              </div>
+
+              {/* Aggregated Footer Stack Status Bar */}
+              <div className="p-4 bg-paper/60 flex items-center justify-between font-mono text-[0.7rem] text-graphite">
+                <span className="flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                  Production Ready Engine
+                </span>
+                <span>50+ Core Dependencies Total</span>
+              </div>
             </aside>
+
           </div>
         </div>
       </section>
@@ -197,17 +231,17 @@ const Technologies = () => {
             </span>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,240px)_1fr]">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,260px)_1fr]">
 
-            {/* category index */}
-            <ul className="border border-line bg-white">
+            {/* Category Index Sidebar */}
+            <ul className="border border-line bg-white divide-y divide-line h-fit">
               {techStack.map((stack, i) => {
                 const CatIcon = stack.icon;
                 return (
                   <li key={stack.category}>
                     <button
                       onClick={() => setSelected(i)}
-                      className={`flex w-full items-center gap-3 border-b border-line px-4 py-4 text-left transition last:border-b-0 ${
+                      className={`flex w-full items-center gap-3 px-4 py-4 text-left transition ${
                         selected === i ? "bg-accent/5" : "hover:bg-paper"
                       }`}
                     >
@@ -227,7 +261,7 @@ const Technologies = () => {
               })}
             </ul>
 
-            {/* detail panel */}
+            {/* Detail Panel */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={selected}
@@ -237,7 +271,7 @@ const Technologies = () => {
                 transition={{ duration: 0.22 }}
                 className="border border-line bg-white"
               >
-                {/* panel header */}
+                {/* Panel Header */}
                 <div className="flex items-center gap-4 border-b border-line px-6 py-5">
                   <Icon className="h-5 w-5 text-ink" strokeWidth={1.6} />
                   <div>
@@ -250,7 +284,7 @@ const Technologies = () => {
                   </div>
                 </div>
 
-                {/* features row */}
+                {/* Features Row */}
                 <div className="flex flex-wrap gap-1.5 border-b border-line px-6 py-4">
                   {active.features.map((f) => (
                     <span
@@ -263,8 +297,8 @@ const Technologies = () => {
                   ))}
                 </div>
 
-                {/* tech grid */}
-                <div className="grid grid-cols-2 border-t-0 sm:grid-cols-4">
+                {/* Tech Inner Matrix Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y divide-line border-t-0">
                   {[...active.technologies]
                     .sort((a, b) => levelOrder[a.level] - levelOrder[b.level])
                     .map((tech, i) => (
@@ -273,9 +307,7 @@ const Technologies = () => {
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.25, delay: i * 0.04 }}
-                        className={`flex flex-col border-b border-r border-line p-5 ${
-                          i % 2 === 1 ? "border-r-0 sm:border-r border-line" : ""
-                        } ${i % 4 === 3 ? "sm:border-r-0" : ""}`}
+                        className="flex flex-col border-line p-5"
                       >
                         <div className="flex items-center justify-between">
                           <span className="font-display text-[0.97rem] font-medium text-ink">
@@ -294,12 +326,9 @@ const Technologies = () => {
                           >
                             {tech.level.toLowerCase()}
                           </span>
-                          {/* <span className="font-mono text-[0.68rem] text-faint">
-                            {tech.projects}+ projects
-                          </span> */}
                         </div>
 
-                        {/* proficiency bar */}
+                        {/* Proficiency Metric Bar */}
                         <div className="mt-3 h-[2px] w-full bg-line">
                           <div
                             className="h-full bg-accent"
@@ -322,7 +351,7 @@ const Technologies = () => {
         </div>
       </section>
 
-      {/* ══════════ ALL TECHNOLOGIES FLAT ROW ══════════ */}
+      {/* ══════════ FLAT MATRIX FOOTER ══════════ */}
       <section className="border-b border-line">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-14 md:py-16">
           <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-faint">
@@ -333,7 +362,7 @@ const Technologies = () => {
             {techStack.flatMap((s) => s.technologies).map((t) => (
               <span
                 key={`${t.name}-flat`}
-                className="border border-line-strong bg-white px-3 py-1.5 font-mono text-[0.75rem] text-ink"
+                className="border border-line-strong bg-white px-3 py-1.5 font-mono text-[0.75rem] text-ink hover:border-accent transition-colors duration-150 cursor-default"
               >
                 {t.name}
               </span>
@@ -342,7 +371,7 @@ const Technologies = () => {
         </div>
       </section>
 
-      {/* ══════════ CTA ══════════ */}
+      {/* ══════════ CALL TO ACTION ══════════ */}
       <section className="bg-ink text-paper">
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 py-16 md:py-24">
           <span className="inline-flex items-center gap-2.5 font-mono text-[0.72rem] lowercase text-[#9AA0AC]">

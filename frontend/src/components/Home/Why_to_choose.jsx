@@ -64,7 +64,10 @@ const WhyChooseUs = () => {
                   <span className="font-mono text-[0.72rem] text-accent pt-1">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <Icon className="h-5 w-5 flex-none text-ink" strokeWidth={1.6} />
+                  <Icon
+                    className="h-5 w-5 flex-none text-ink"
+                    strokeWidth={1.6}
+                  />
                   <div>
                     <h3 className="font-display text-[1.1rem] font-medium text-ink">
                       {title}
@@ -104,6 +107,7 @@ const WhyChooseUs = () => {
         </div>
       </div>
     </section>
+    
   );
 };
 

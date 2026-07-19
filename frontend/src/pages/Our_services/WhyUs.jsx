@@ -10,6 +10,7 @@ import {
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
+import TeamSection from "../../components/Home/Meet_our_team.jsx";
 
 /* ─── data ───────────────────────────────────────────────────── */
 
@@ -312,6 +313,10 @@ const WhyUs = () => {
             </ul>
           </div>
         </div>
+      </section>
+
+      <section>
+        <TeamSection />
       </section>
 
       {/* ══════════ TRUST BADGES ══════════ */}
